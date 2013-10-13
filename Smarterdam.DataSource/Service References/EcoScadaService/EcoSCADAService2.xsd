@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="BuildingState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Closed" />
+      <xs:enumeration value="Open" />
+      <xs:enumeration value="all" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="BuildingState" nillable="true" type="tns:BuildingState" />
+  <xs:complexType name="ArrayOfCompositeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompositeType" nillable="true" type="tns:CompositeType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompositeType" nillable="true" type="tns:ArrayOfCompositeType" />
+  <xs:complexType name="CompositeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimeStamp" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Value" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompositeType" nillable="true" type="tns:CompositeType" />
+  <xs:simpleType name="AverageFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SevenLastDays" />
+      <xs:enumeration value="FourSimilarDays" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AverageFormat" nillable="true" type="tns:AverageFormat" />
+  <xs:complexType name="ArrayOfTableConnections">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TableConnections" nillable="true" type="tns:TableConnections" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTableConnections" nillable="true" type="tns:ArrayOfTableConnections" />
+  <xs:complexType name="TableConnections">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AverageValue" type="xs:double" />
+      <xs:element minOccurs="0" name="Dimention" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstMeasurementTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LastMeasurementTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastMeasurementValue" type="xs:double" />
+      <xs:element minOccurs="0" name="MaximumValue" type="xs:double" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Satisfaction" nillable="true" type="tns:Faces" />
+      <xs:element minOccurs="0" name="TodayEconomy" type="xs:double" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TableConnections" nillable="true" type="tns:TableConnections" />
+  <xs:simpleType name="Faces">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Min20" />
+      <xs:enumeration value="Min40" />
+      <xs:enumeration value="Min60" />
+      <xs:enumeration value="Min80" />
+      <xs:enumeration value="Min100" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Faces" nillable="true" type="tns:Faces" />
+  <xs:complexType name="UserStates">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AvailableInstancesCugs" nillable="true" type="tns:ArrayOfInstanceCugPair" />
+      <xs:element minOccurs="0" name="authState" type="xs:boolean" />
+      <xs:element minOccurs="0" name="cug" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="instance" type="xs:int" />
+      <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userId" type="xs:int" />
+      <xs:element minOccurs="0" name="userMode" type="xs:int" />
+      <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserStates" nillable="true" type="tns:UserStates" />
+  <xs:complexType name="ArrayOfInstanceCugPair">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InstanceCugPair" nillable="true" type="tns:InstanceCugPair" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInstanceCugPair" nillable="true" type="tns:ArrayOfInstanceCugPair" />
+  <xs:complexType name="InstanceCugPair">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cug" type="xs:int" />
+      <xs:element minOccurs="0" name="instance" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InstanceCugPair" nillable="true" type="tns:InstanceCugPair" />
+  <xs:complexType name="ArrayOfBuilding">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Building" nillable="true" type="tns:Building" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBuilding" nillable="true" type="tns:ArrayOfBuilding" />
+  <xs:complexType name="Building">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErectedYear" type="xs:int" />
+      <xs:element minOccurs="0" name="Stuff" type="xs:int" />
+      <xs:element minOccurs="0" name="Visitors" type="xs:int" />
+      <xs:element minOccurs="0" name="WorkingHours" type="xs:int" />
+      <xs:element minOccurs="0" name="buildingName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="country" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Building" nillable="true" type="tns:Building" />
+  <xs:complexType name="BuildingConsumption">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClosedHours" type="xs:double" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OpenHours" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BuildingConsumption" nillable="true" type="tns:BuildingConsumption" />
+</xs:schema>

@@ -1,0 +1,75 @@
+﻿@using System.Web.Optimization
+@inherits System.Web.Mvc.WebViewPage<Smarterdam.Web.ViewModels.StatusViewModel>
+
+@{
+    ViewBag.Title = "Batch results";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/highcharts")
+<script type="text/javascript">
+    var chart1; // globally available
+    $(document).ready(function() {
+        chart1 = $("#chartContainer").highcharts({
+            chart: {
+                renderTo: 'chartContainer',
+                type: 'column'
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                categories: GetCategories(eval('@Html.Raw(Model.ChartData)')),
+                labels: {
+                    rotation: -90,
+                    y:45
+                }
+            },
+            yAxis: {
+                title: {
+                    type: '',
+                    text: 'MAPE'
+                }
+            },
+            plotOptions: {
+                line: {
+                    gapSize: 0,
+                    connectNulls: true,
+                    lineWidth: 1,
+                    marker: {
+                        enabled: false
+                    }
+                },
+                series: {
+                    cropThreshold: 50
+                }
+            },
+            tooltip: {
+                shared: true,
+                crosshairs: true
+            },
+            series: [
+                {
+                    name: "Results",
+                    data: DrawGraph(eval('@Html.Raw(Model.ChartData)'))
+                }
+            ]
+        });
+    });
+    
+    function DrawGraph(str_values) {
+        return $.map(str_values, function (val) { return val.Quantity; });
+    };
+    
+    function GetCategories(str_values) {
+        return $.map(str_values, function (val) { return val.Error; });
+    };
+    
+    function parseJsonDate(jsonDateString) {
+        var date = new Date(jsonDateString);
+
+        var utcDate = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+        return utcDate;
+    }
+</script>
+<div id="chartContainer"></div>

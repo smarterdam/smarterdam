@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EcoSCADAData" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://flexible.ecoscada.com/service_test/EcoSCADAService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://flexible.ecoscada.com/service_test/EcoSCADAService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://flexible.ecoscada.com/service_test/EcoSCADAService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IEcoSCADAData_GetSumPerPeriod_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSumPerPeriod" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetSumPerPeriod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSumPerPeriodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetMeasurementsPerPeriod_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementsPerPeriod" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetMeasurementsPerPeriod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementsPerPeriodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetReductionsCo2Kg_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReductionsCo2Kg" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetReductionsCo2Kg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReductionsCo2KgResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetDailyAverage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyAverage" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetDailyAverage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyAverageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetCugList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCugList" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetCugList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCugListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetBuildingList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingList" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetBuildingList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetMeasurementsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementsList" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetMeasurementsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetCarsKilometers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCarsKilometers" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetCarsKilometers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCarsKilometersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetInstances_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstances" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetInstances_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstancesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetBuildingWorkingHours_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingWorkingHours" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetBuildingWorkingHours_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingWorkingHoursResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetReductionsCo2Relative_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReductionsCo2Relative" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetReductionsCo2Relative_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReductionsCo2RelativeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_UserExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserExists" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_UserExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetMeasurementsInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementsInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetMeasurementsInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementsInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetListOfBuildingsByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListOfBuildingsByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetListOfBuildingsByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListOfBuildingsByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetBuildingProperties_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingProperties" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetBuildingProperties_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingPropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetDayNightRatio_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDayNightRatio" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADAData_GetDayNightRatio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDayNightRatioResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IEcoSCADAData">
+    <wsdl:operation name="GetSumPerPeriod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetSumPerPeriod" message="tns:IEcoSCADAData_GetSumPerPeriod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetSumPerPeriodResponse" message="tns:IEcoSCADAData_GetSumPerPeriod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementsPerPeriod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetMeasurementsPerPeriod" message="tns:IEcoSCADAData_GetMeasurementsPerPeriod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetMeasurementsPerPeriodResponse" message="tns:IEcoSCADAData_GetMeasurementsPerPeriod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReductionsCo2Kg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetReductionsCo2Kg" message="tns:IEcoSCADAData_GetReductionsCo2Kg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetReductionsCo2KgResponse" message="tns:IEcoSCADAData_GetReductionsCo2Kg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyAverage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetDailyAverage" message="tns:IEcoSCADAData_GetDailyAverage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetDailyAverageResponse" message="tns:IEcoSCADAData_GetDailyAverage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCugList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetCugList" message="tns:IEcoSCADAData_GetCugList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetCugListResponse" message="tns:IEcoSCADAData_GetCugList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetBuildingList" message="tns:IEcoSCADAData_GetBuildingList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetBuildingListResponse" message="tns:IEcoSCADAData_GetBuildingList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetMeasurementsList" message="tns:IEcoSCADAData_GetMeasurementsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetMeasurementsListResponse" message="tns:IEcoSCADAData_GetMeasurementsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarsKilometers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetCarsKilometers" message="tns:IEcoSCADAData_GetCarsKilometers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetCarsKilometersResponse" message="tns:IEcoSCADAData_GetCarsKilometers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInstances">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetInstances" message="tns:IEcoSCADAData_GetInstances_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetInstancesResponse" message="tns:IEcoSCADAData_GetInstances_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingWorkingHours">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetBuildingWorkingHours" message="tns:IEcoSCADAData_GetBuildingWorkingHours_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetBuildingWorkingHoursResponse" message="tns:IEcoSCADAData_GetBuildingWorkingHours_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReductionsCo2Relative">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetReductionsCo2Relative" message="tns:IEcoSCADAData_GetReductionsCo2Relative_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetReductionsCo2RelativeResponse" message="tns:IEcoSCADAData_GetReductionsCo2Relative_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/UserExists" message="tns:IEcoSCADAData_UserExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/UserExistsResponse" message="tns:IEcoSCADAData_UserExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementsInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetMeasurementsInfo" message="tns:IEcoSCADAData_GetMeasurementsInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetMeasurementsInfoResponse" message="tns:IEcoSCADAData_GetMeasurementsInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetUserInfo" message="tns:IEcoSCADAData_GetUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetUserInfoResponse" message="tns:IEcoSCADAData_GetUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListOfBuildingsByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetListOfBuildingsByUserId" message="tns:IEcoSCADAData_GetListOfBuildingsByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetListOfBuildingsByUserIdResponse" message="tns:IEcoSCADAData_GetListOfBuildingsByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingProperties">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetBuildingProperties" message="tns:IEcoSCADAData_GetBuildingProperties_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetBuildingPropertiesResponse" message="tns:IEcoSCADAData_GetBuildingProperties_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDayNightRatio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADAData/GetDayNightRatio" message="tns:IEcoSCADAData_GetDayNightRatio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADAData/GetDayNightRatioResponse" message="tns:IEcoSCADAData_GetDayNightRatio_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IEcoSCADAData" type="tns:IEcoSCADAData">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSumPerPeriod">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetSumPerPeriod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementsPerPeriod">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetMeasurementsPerPeriod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReductionsCo2Kg">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetReductionsCo2Kg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyAverage">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetDailyAverage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCugList">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetCugList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingList">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetBuildingList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementsList">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetMeasurementsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarsKilometers">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetCarsKilometers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInstances">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetInstances" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingWorkingHours">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetBuildingWorkingHours" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReductionsCo2Relative">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetReductionsCo2Relative" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserExists">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/UserExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementsInfo">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetMeasurementsInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListOfBuildingsByUserId">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetListOfBuildingsByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingProperties">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetBuildingProperties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDayNightRatio">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADAData/GetDayNightRatio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EcoSCADAData">
+    <wsdl:port name="BasicHttpBinding_IEcoSCADAData" binding="tns:BasicHttpBinding_IEcoSCADAData">
+      <soap:address location="http://flexible.ecoscada.com/service_test/EcoSCADAService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

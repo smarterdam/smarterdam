@@ -1,0 +1,82 @@
+﻿@using System.Web.Optimization
+@inherits System.Web.Mvc.WebViewPage<Smarterdam.Web.ViewModels.StatusViewModel>
+
+@{
+    ViewBag.Title = "Status";
+}
+@Scripts.Render("~/bundles/jquery")  
+@Scripts.Render("~/bundles/highcharts")  
+<script type="text/javascript">
+    var chart1; // globally available
+    $(document).ready(function() {
+        chart1 = $("#chartContainer").highcharts({
+            chart: {
+                renderTo: 'chartContainer',
+                type: 'line'
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                type: 'datetime',
+                gridLineWidth: 1,
+                tickPixelInterval: 45,
+                maxZoom: 20 * 1000
+            },
+            yAxis: {
+                title: {
+                    type: '',
+                    text: 'Energy consumption'
+                }
+            },
+            plotOptions: {
+                line: {
+                    gapSize: 0,
+                    connectNulls: true,
+                    lineWidth: 1,
+                    marker: {
+                        enabled: false
+                    }
+                },
+                series: {
+                    cropThreshold: 50
+                }
+            },
+            tooltip: {
+                shared: true,
+                crosshairs: true
+            },
+            series: [
+                //{ name: "Forecast" },
+                {
+                    name: "Real",
+                    data: DrawGraph(eval('@Html.Raw(Model.ChartData)'))
+                }
+            ]
+        });
+
+        //var chartData = eval('@Html.Raw(Model.ChartData)');
+        //DrawGraph(chartData);
+    });
+    
+    function DrawGraph(str_values) {
+        var realData = [];
+
+        $.each(str_values, function (idx, val) { if (val.ValueReal != null) {
+                                                     realData.push([ parseJsonDate(val.TimeStamp), parseFloat(val.ValueReal) ]);
+                                                 } });
+
+        realData = realData.sort(function(a, b) { return a[0] > b[0] ? 1 : -1; });
+
+        return realData;
+        //chart1.series[0].setData(realData);
+    };
+    
+    function parseJsonDate(jsonDateString) {
+        var date = new Date(jsonDateString);
+
+        var utcDate = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+        return utcDate;
+    }
+</script>
+<div id="chartContainer"></div>

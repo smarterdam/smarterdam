@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://flexible.ecoscada.com/service_test/EcoSCADAService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" />
+  <xs:element name="GetSumPerPeriod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="fr" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="to" type="xs:dateTime" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="bs" type="q1:BuildingState" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSumPerPeriodResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSumPerPeriodResult" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementsPerPeriod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="fr" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="to" type="xs:dateTime" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="bs" nillable="true" type="q2:BuildingState" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementsPerPeriodResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetMeasurementsPerPeriodResult" nillable="true" type="q3:ArrayOfCompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReductionsCo2Kg">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="fr" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="to" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReductionsCo2KgResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetReductionsCo2KgResult" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyAverage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="baseDateTime" type="xs:dateTime" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="mode" type="q4:AverageFormat" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDailyAverageResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetDailyAverageResult" nillable="true" type="q5:ArrayOfCompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCugList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="instanceId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCugListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetCugListResult" nillable="true" type="q6:ArrayOfTableConnections" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBuildingList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cugid" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBuildingListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetBuildingListResult" nillable="true" type="q7:ArrayOfTableConnections" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementsList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BuildingId" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementsListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetMeasurementsListResult" nillable="true" type="q8:ArrayOfTableConnections" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCarsKilometers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementid" type="xs:int" />
+        <xs:element minOccurs="0" name="from" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="to" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCarsKilometersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetCarsKilometersResult" nillable="true" type="q9:ArrayOfCompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInstances">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInstancesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetInstancesResult" nillable="true" type="q10:ArrayOfTableConnections" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBuildingWorkingHours">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="buildingId" type="xs:int" />
+        <xs:element minOccurs="0" name="From" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="to" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBuildingWorkingHoursResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetBuildingWorkingHoursResult" nillable="true" type="q11:ArrayOfCompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReductionsCo2Relative">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SolarPanelMeasurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="ConsumptionMeasurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="fr" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="to" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReductionsCo2RelativeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetReductionsCo2RelativeResult" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserExists">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserExistsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="UserExistsResult" nillable="true" type="q12:UserStates" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementsInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementsInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetMeasurementsInfoResult" nillable="true" type="q13:TableConnections" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetUserInfoResult" nillable="true" type="q14:UserStates" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListOfBuildingsByUserId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListOfBuildingsByUserIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetListOfBuildingsByUserIdResult" nillable="true" type="q15:ArrayOfTableConnections" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBuildingProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BuildingId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBuildingPropertiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetBuildingPropertiesResult" nillable="true" type="q16:ArrayOfBuilding" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDayNightRatio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDayNightRatioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/WcfEcoSCADAData" minOccurs="0" name="GetDayNightRatioResult" nillable="true" type="q17:BuildingConsumption" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,59 @@
+﻿@using System.Web.Optimization
+@inherits System.Web.Mvc.WebViewPage<Smarterdam.Web.ViewModels.IndexViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Scripts.Render("~/bundles/jquery")  
+<script type="text/javascript">
+    $(function () {
+        $("#start_btn").click(function () {
+            var measurement_id = $("#measurements_dropdown").val();
+
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + "/Home/Go",
+                data: { id: measurement_id },
+                beforeSend: function () {
+                    $("#loading").show();
+                    $("#start_batch_btn #start_btn").attr("disabled", "disabled");
+                },
+                complete: function () {
+                    $("#loading").hide();
+                    $("#start_batch_btn #start_btn").removeAttr("disabled");
+                }
+            });
+        });
+        
+        $("#start_batch_btn").click(function () {
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + "/Home/BatchGo",
+                beforeSend: function () {
+                    $("#loading").show();
+                    $("#start_batch_btn #start_btn").attr("disabled", "disabled");
+                },
+                complete: function () {
+                    $("#loading").hide();
+                    $("#start_batch_btn #start_btn").removeAttr("disabled");
+                }
+            });
+        });
+    })
+</script>
+<input type="button" id="start_batch_btn" value="Batch Go" />
+@Html.DropDownList("measurements_dropdown", Model.Measurements)
+<input type="button" id="start_btn" value="Go" />
+<div style="display: none" id="loading">Loading...</div>
+<br />
+<br />
+<a href="/Home/BatchResults">Batch results</a>
+<br />
+<br />
+@foreach (var item in Model.CurrentTasks)
+{
+    <div>
+        <a href="/Home/Status?id=@item">@item</a>
+    </div>
+}
