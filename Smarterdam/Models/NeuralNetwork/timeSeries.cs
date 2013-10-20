@@ -7,13 +7,10 @@ using System.Text;
 namespace Smarterdam.Models.NeuralNetwork
 {
     /// <summary>
-    /// class time series represents the arra as a time series;
-    /// 
+    /// class time series represents the array as a time series;
     /// </summary>
-    public class timeSeries
+    public class TimeSeries
     {
-        //private int raws;
-
         public String name;
         public String fileName;
 
@@ -132,7 +129,7 @@ namespace Smarterdam.Models.NeuralNetwork
         /// 0 initialisation
         /// </summary>
         /// <param name="_raws"></param>
-        public timeSeries(int _raws)
+        public TimeSeries(int _raws)
         {
             DateTime dt = new DateTime();
             dt = DateTime.Now;
@@ -155,7 +152,7 @@ namespace Smarterdam.Models.NeuralNetwork
         /// <param name="_fileName"></param>
         /// <param name="_flagHeader"></param>
         /// <param name="_separator"></param>
-        public timeSeries(String _fileName, bool _flagHeader, char _separator, int _competitionId, String _name)
+        public TimeSeries(String _fileName, bool _flagHeader, char _separator, int _competitionId, String _name)
         {
             fileName = _fileName;
             name = _name;
@@ -267,7 +264,7 @@ namespace Smarterdam.Models.NeuralNetwork
         /// </summary>
         /// <param name="_p">integration parameter </param>
         /// <returns></returns>
-        public timeSeries aggregate(int _p)
+        public TimeSeries aggregate(int _p)
         {
 
             if (_p > 0)
@@ -275,7 +272,7 @@ namespace Smarterdam.Models.NeuralNetwork
 
 
                 int length = this.timeseries.Count();
-                timeSeries ts = new timeSeries(length / _p);
+                TimeSeries ts = new TimeSeries(length / _p);
                 int cx = 0;
                 int k = 0; // counter of the new timeseries;
 
@@ -324,9 +321,9 @@ namespace Smarterdam.Models.NeuralNetwork
         /// <param name="_start"></param>
         /// <param name="_length"></param>
         /// <returns></returns>
-        public timeSeries getSample(int _start, int _length)
+        public TimeSeries getSample(int _start, int _length)
         {
-            timeSeries ts = new timeSeries(_length);
+            TimeSeries ts = new TimeSeries(_length);
 
             if ((_start + _length) > timeseries.Count)
             {
@@ -351,7 +348,7 @@ namespace Smarterdam.Models.NeuralNetwork
         /// <param name="_start">Data time start point</param>
         /// <param name="_end">Data time end point</param>
         /// <returns></returns>
-        public timeSeries getSample(DateTime _start, DateTime _end)
+        public TimeSeries getSample(DateTime _start, DateTime _end)
         {
             // do calculation of time;
             int startPoint = 0;
@@ -369,16 +366,16 @@ namespace Smarterdam.Models.NeuralNetwork
             }
             length = (endPoint - startPoint) + 1;
 
-            timeSeries ts = new timeSeries(length);
+            TimeSeries ts = new TimeSeries(length);
             ts = getSample(startPoint, length);
             return ts;
         }
 
 
-        public timeSeries getSample(int _hour, int _minute, bool _status = true)
+        public TimeSeries getSample(int _hour, int _minute, bool _status = true)
         {
             int _length = timeseries.Count / 96;
-            timeSeries ts = new timeSeries(_length);
+            TimeSeries ts = new TimeSeries(_length);
             int j = 0;
             for (int i = 0; i < timeseries.Count; i++)
             {
@@ -407,10 +404,10 @@ namespace Smarterdam.Models.NeuralNetwork
         /// <param name="_timestamp"></param>
         /// <param name="_lengthOfShortInterval"></param>
         /// <returns></returns>
-        public timeSeries getSample(String _timestamp, int _lengthOfShortInterval)
+        public TimeSeries getSample(String _timestamp, int _lengthOfShortInterval)
         {
             int _length = timeseries.Count / _lengthOfShortInterval;
-            timeSeries ts = new timeSeries(_length);
+            TimeSeries ts = new TimeSeries(_length);
 
             //_length
 
@@ -439,9 +436,9 @@ namespace Smarterdam.Models.NeuralNetwork
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static timeSeries operator +(timeSeries a, timeSeries b)
+        public static TimeSeries operator +(TimeSeries a, TimeSeries b)
         {
-            timeSeries ts = new timeSeries(a.timeseries.Count + b.timeseries.Count);
+            TimeSeries ts = new TimeSeries(a.timeseries.Count + b.timeseries.Count);
             int k = 0;
             for (int i = 0; i < a.timeseries.Count; i++)
             {
@@ -487,7 +484,7 @@ namespace Smarterdam.Models.NeuralNetwork
         /// </summary>
         /// <param name="_dayOfWeek">number of day of week</param>
         /// <returns></returns>
-        public timeSeries getTimeSeriesDayOfWeek(int _dayOfWeek)
+        public TimeSeries getTimeSeriesDayOfWeek(int _dayOfWeek)
         {
             int numberOfDayOfWeeks = 7;
 
@@ -503,7 +500,7 @@ namespace Smarterdam.Models.NeuralNetwork
                     _length++;
                 }
             }
-            timeSeries ts = new timeSeries(_length);
+            TimeSeries ts = new TimeSeries(_length);
 
             int j = 0;
             for (int i = 0; i < timeseries.Count; i++)
@@ -626,7 +623,7 @@ namespace Smarterdam.Models.NeuralNetwork
         }
 
 
-        public timeSeries rearrangeTimeStamp(DateTime _dts, DateTime _dtf)
+        public TimeSeries rearrangeTimeStamp(DateTime _dts, DateTime _dtf)
         {
 
             int length = 0;
@@ -653,7 +650,7 @@ namespace Smarterdam.Models.NeuralNetwork
                     terminator = true;
             }
 
-            timeSeries ts = new timeSeries(length);
+            TimeSeries ts = new TimeSeries(length);
 
             //ones again
             terminator = false;

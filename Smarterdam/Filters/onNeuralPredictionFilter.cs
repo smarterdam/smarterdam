@@ -14,9 +14,9 @@ namespace Smarterdam.Filters
     {
         FilterParameters parameters;
 
-        private timeSeries timeSeries;
-        private forecastSettings settings;
-        private mns96_incremental model;
+        private TimeSeries timeSeries;
+        private ForecastSettings settings;
+        private MultipleNeuralNetworksModel model;
         private bool trainingFinished;
 
         private DateTime waitUntil;
@@ -28,15 +28,15 @@ namespace Smarterdam.Filters
         {
             this.waitUntil = trainTill;
             //this.iterations = testSize;
-            this.timeSeries = new timeSeries(0);
+            this.timeSeries = new TimeSeries(0);
 
-            settings = new forecastSettings();
+            settings = new ForecastSettings();
             for (int i = 0; i < 5; i++)
             {
                 settings.energyLags.Add(i + 1);
             }
 
-            model = new mns96_incremental();
+            model = new MultipleNeuralNetworksModel();
             this.parameters = parameters;
             parameters.Values["model"] = model;
         }
@@ -66,20 +66,19 @@ namespace Smarterdam.Filters
 
             this.timeSeries.timeseries.Add(realValue);
             this.timeSeries.timestamps.Add(dateTime);
-            //this.timeSeries.outlierLabel.Add(int.Parse(newValue.Values["Result"].ToString()));
+            //this.TimeSeries.outlierLabel.Add(int.Parse(newValue.Values["Result"].ToString()));
             this.timeSeries.temperature.Add(0);
             this.timeSeries.status.Add(0);
             this.timeSeries.cluster.Add(0);
 
-            var forecastResult = model.forecast(timeSeries, 0, settings);
-            newValue.Values["PredictedValue"] = forecastResult.timeseries.Last();
-            forecastResult.timeseries[forecastResult.timeseries.Count - 1] = realValue;
-
+            var forecastResult = model.Forecast(timeSeries, 0, settings);
+            newValue.Values["PredictedValue"] = forecastResult;
+            
             newValue.Values["EnergyLag"] = waitUntil;
 
-            if (model.mlnset.Count > globalCounter % NN_NUMBER)
+            if (model.NetworkSet.Count > globalCounter % NN_NUMBER)
             {
-                parameters.Values["NeuralNetwork"] = model.mlnset[globalCounter % NN_NUMBER];
+                parameters.Values["NeuralNetwork"] = model.NetworkSet[globalCounter % NN_NUMBER];
             }
 
             globalCounter++;

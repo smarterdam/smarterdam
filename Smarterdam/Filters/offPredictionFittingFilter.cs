@@ -13,17 +13,17 @@ namespace Smarterdam.Filters
     {
         FilterParameters parameters;
 
-        private List<timeSeries> storeTimeSeries;
+        private List<TimeSeries> storeTimeSeries;
         private int counter = 0;
 
         private int PACKAGE_SIZE = 96;
         private DateTime waitUntil;
         private int globalCounter;
-        private forecastSettings settings;
+        private ForecastSettings settings;
 
         private Dictionary<string, int> time;
 
-        private List<timeSeries> timeSeriesEnsemble = new List<timeSeries>();
+        private List<TimeSeries> timeSeriesEnsemble = new List<TimeSeries>();
 
         public offPredictionFittingFilter(FilterParameters parameters, DateTime trainTill, Dictionary<string, int> time)
         {
@@ -31,7 +31,7 @@ namespace Smarterdam.Filters
             this.waitUntil = trainTill;
             this.parameters = parameters;
 
-            settings = new forecastSettings();
+            settings = new ForecastSettings();
             for (int i = 0; i < 5; i++)
             {
                 settings.energyLags.Add(i + 1);
@@ -39,7 +39,7 @@ namespace Smarterdam.Filters
 
             for (int i = 0; i < PACKAGE_SIZE; i++)
             {
-                timeSeriesEnsemble.Add(new timeSeries(0));
+                timeSeriesEnsemble.Add(new TimeSeries(0));
             }
         }
 
@@ -68,8 +68,8 @@ namespace Smarterdam.Filters
 
             if (counter == PACKAGE_SIZE)
             {
-                var model = parameters["model"] as mns96_incremental;
-                model.trainingEnsemble(timeSeriesEnsemble, settings, true);
+                var model = parameters["model"] as MultipleNeuralNetworksModel;
+                model.Train(timeSeriesEnsemble, settings, true);
                 counter = 0;
                 this.time[globalCounter + "Training"] = 1;
             }

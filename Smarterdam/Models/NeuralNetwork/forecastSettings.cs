@@ -5,26 +5,20 @@ using System.Text;
 
 namespace Smarterdam.Models.NeuralNetwork
 {
-    public class forecastSettings
+    public class ForecastSettings
     {
-        public List<int> energyLags;
-        public List<int> statusLags;
-        public List<int> temparatureLags;
-        public List<int> dayofweekLags;
-
-
-
-        public List<timeSeries> tsList;
-
-
+        //лаги для прогнозирования энергии. 
+        //Значения лагов 1,2,3,4 означают, что для прогнозирования следующего 
+        //значения будут взяты значения 1-, 2-, 3- и 4-дневной давности
+        public List<int> energyLags; 
+        
+        public List<TimeSeries> tsList;
+        
         public int neuronsInHiddenLayer;
 
-        public forecastSettings()
+        public ForecastSettings()
         {
             energyLags = new List<int>();
-            statusLags = new List<int>();
-            temparatureLags = new List<int>();
-            dayofweekLags = new List<int>();
 
             neuronsInHiddenLayer = 5;
         }
