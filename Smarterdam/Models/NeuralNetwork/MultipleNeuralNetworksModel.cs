@@ -114,7 +114,7 @@ namespace Smarterdam.Models.NeuralNetwork
                     for (int e = 0; e < neuralNetwork.absoluteErrors.Count; e++)
                     {
                         //денормализация
-                        neuralNetwork.absoluteErrors[e] = (neuralNetwork.absoluteErrors[i] * (maxValues[i] - minValues[i]) + minValues[i]);
+                        neuralNetwork.absoluteErrors[e] = (neuralNetwork.absoluteErrors[e] * (maxValues[i] - minValues[i]) + minValues[i]);
                     }
 
                     if (networkSet.Count <= i)

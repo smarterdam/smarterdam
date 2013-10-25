@@ -72,7 +72,7 @@ namespace Smarterdam.Filters
             this.timeSeries.cluster.Add(0);
 
             var forecastResult = model.Forecast(timeSeries, 0, settings);
-            newValue.Values["PredictedValue"] = forecastResult;
+            newValue.Values["PredictedValue"] = forecastResult ?? realValue;
             
             newValue.Values["EnergyLag"] = waitUntil;
 

@@ -32,7 +32,7 @@ namespace Smarterdam.Client
 
         public virtual PipelinePack ComposePipeline(Commands command, string id)
         {
-            trainUntil = DateTime.Now.AddDays(-20);
+            trainUntil = DateTime.Now.AddDays(-3);
 
             List<List<float>> DbRealValue = new List<List<float>>();
             List<DateTime> DbDateTime = new List<DateTime>();
