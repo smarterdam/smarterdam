@@ -72,6 +72,7 @@
     <Compile Include="Client\SmarterdamFactory.cs" />
     <Compile Include="Client\Starter.cs" />
     <Compile Include="Client\StreamServerCallback.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="DataAccess\DbEntities\DbForecastResult.cs" />
     <Compile Include="DataAccess\FileForecastResultRepository.cs" />
     <Compile Include="DataAccess\IForecastResultRepository.cs" />
@@ -83,6 +84,9 @@
     <Compile Include="Filters\offPredictionFittingFilter.cs" />
     <Compile Include="Filters\onErrorCalculationFilter.cs" />
     <Compile Include="Filters\onNeuralPredictionFilter.cs" />
+    <Compile Include="Helpers\IRandomValueProvider.cs" />
+    <Compile Include="Helpers\MockRandomValueProvider.cs" />
+    <Compile Include="Helpers\RandomValueProvider.cs" />
     <Compile Include="Models\NeuralNetwork\AdditiveNonlinearLayer.cs" />
     <Compile Include="Models\NeuralNetwork\AdditiveNonlinearNeuron.cs" />
     <Compile Include="Models\NeuralNetwork\AdditiveNonlinearOutputLayer.cs" />
