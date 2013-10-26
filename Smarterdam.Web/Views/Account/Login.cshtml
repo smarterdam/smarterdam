@@ -49,7 +49,7 @@
         {
             <h2 class="form-signin-heading">Please sign in</h2>
             @Html.TextBox("username", "", new { @class = "input-block-level", placeholder = "Login"})
-            @Html.TextBox("username", "", new { @class = "input-block-level", placeholder = "Password"})
+            @Html.Password("password", "", new { @class = "input-block-level", placeholder = "Password"})
             <button class="btn btn-large btn-primary" type="submit">Sign in</button>
         }
     </div>
