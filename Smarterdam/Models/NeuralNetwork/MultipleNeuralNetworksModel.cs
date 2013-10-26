@@ -45,7 +45,10 @@ namespace Smarterdam.Models.NeuralNetwork
 
             networkSet[counter].propagate(inputVector);
 
-            return networkSet[counter].Outputs.First();
+            var output = networkSet[counter].Outputs.First();
+            output = output*(maxValues[counter] - minValues[counter]) + minValues[counter];
+
+            return output;
         }
 
         /// <summary>
