@@ -26,6 +26,9 @@ namespace Smarterdam.Web
 
             BundleTable.Bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
                 "~/Scripts/Highcharts-3.0.1/js/highcharts.js"));
+
+            BundleTable.Bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/Scripts/bootstrap.min.js"));
         }
     }
 }
