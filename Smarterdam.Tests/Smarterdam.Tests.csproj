@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -44,10 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\MockMessageQueue.cs" />
+    <Compile Include="Mocks\MockResultsRepository.cs" />
     <Compile Include="NeuralNetworkPipelineTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Smarterdam.Api\Smarterdam.Api.csproj">
+      <Project>{605c2c19-fa34-4585-9293-f8abcc2224cd}</Project>
+      <Name>Smarterdam.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Smarterdam\Smarterdam.Core.csproj">
       <Project>{2c5c205d-5664-40c7-adfa-dd62527675a5}</Project>
       <Name>Smarterdam.Core</Name>

@@ -11,7 +11,7 @@ namespace Smarterdam.Client
     public class IntelligenceManager : IIntelligenceManager
     {
         private FilterParameters parameters;
-        private int trainingSize;
+        private IForecastResultRepository resultsRepository;
 
         private DateTime trainUntil;
 
@@ -26,8 +26,9 @@ namespace Smarterdam.Client
             public string Validity { get; set; }
         }
 
-        public IntelligenceManager()
+        public IntelligenceManager(IForecastResultRepository repository)
         {
+            this.resultsRepository = repository;
         }
 
         public virtual PipelinePack ComposePipeline(Commands command, string id)
@@ -57,13 +58,12 @@ namespace Smarterdam.Client
 
             parameters = new FilterParameters();
 
-            trainingSize = 1056;
+            //trainingSize = 1056;
 
             onlinePipeline.Register(new onNeuralPredictionFilter(parameters, trainUntil));
             onlinePipeline.Register(new onErrorCalculationFilter(parameters));
-
-            IForecastResultRepository repo = new MongoDbForecastResultRepository();
-            onlinePipeline.Register(new ResultOutputFilter(repo) { MeasurementId = Int32.Parse(id)});
+            
+            onlinePipeline.Register(new ResultOutputFilter(resultsRepository) { MeasurementId = Int32.Parse(id)});
 
             return onlinePipeline;
         }

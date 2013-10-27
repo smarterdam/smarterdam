@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using Ninject;
+using Smarterdam.Client;
+using Smarterdam.DataAccess;
+using Smarterdam.Tests.Mocks;
 
 namespace Smarterdam.Tests
 {
@@ -13,6 +17,15 @@ namespace Smarterdam.Tests
         public void Test1()
         {
             Assert.AreEqual(1, 1);
+
+            SmarterdamFactory.Init(kernel =>
+                {
+                    kernel.Rebind<IMessageQueue>().To<MockMessageQueue>();
+                    kernel.Rebind<IForecastResultRepository>().To<MockResultsRepository>();
+                });
+
+            var client = SmarterdamFactory.CreateClient();
+            client.Start("", "1");
         }
     }
 }

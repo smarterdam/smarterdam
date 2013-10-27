@@ -32,7 +32,6 @@ namespace Smarterdam.Client
 
         public void StartThreads(Commands command, string measurementId)
         {
-
             stream = new Queue<DataStreamUnit>[3];
             stream[0] = new Queue<DataStreamUnit>();
             stream[1] = new Queue<DataStreamUnit>();
