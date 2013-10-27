@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\MockDataSource.cs" />
     <Compile Include="Mocks\MockMessageQueue.cs" />
     <Compile Include="Mocks\MockResultsRepository.cs" />
+    <Compile Include="Mocks\MockTestStartDateProvider.cs" />
     <Compile Include="NeuralNetworkPipelineTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -35,7 +35,7 @@ namespace Smarterdam.UI
 
             while (query != "quit")
             {
-                //var starter = new Starter(new IntelligenceManager(), new QueryParser(), new StreamServerCallback(new IntelligenceManager()));
+                //var starter = new Starter(new IntelligenceManager(), new QueryParser(), new _threadsStarter(new IntelligenceManager()));
                 starter.Start(query, "0");
                 url = ReadUrl();
                 query = ReadQuery();

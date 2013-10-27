@@ -9,13 +9,14 @@ namespace Smarterdam.DataSource
 {
     public class FileDataSource : IDataSource
     {
+        private string _filePath;
         StreamReader sr;
         string[] headers;
 
         public FileDataSource(string filePath)
         {
             sr = new StreamReader(filePath);
-
+            _filePath = filePath;
             headers = sr.ReadLine().Split(';');
         }
 
@@ -34,6 +35,19 @@ namespace Smarterdam.DataSource
             return !eof;
         }
 
+        private DataStreamUnit ConvertLineToUnit(string line)
+        {
+            var resultUnit = new DataStreamUnit();
+
+            var values = line.Split(';').Where(x => !String.IsNullOrWhiteSpace(x));
+            var paramIndex = 0;
+            resultUnit.Values = new System.Collections.Concurrent.ConcurrentDictionary<string, object>(values.ToDictionary(x => headers[paramIndex++].Trim(), x => (object)x));
+
+            resultUnit.TimeStamp = DateTime.Now;
+
+            return resultUnit;
+        }
+
         public IEnumerable<DataStreamUnit> GetNewData(int measurementId)
         {
             var result = new List<DataStreamUnit>();
@@ -42,13 +56,7 @@ namespace Smarterdam.DataSource
             {
                 var line = sr.ReadLine();
 
-                var resultUnit = new DataStreamUnit();
-
-                var values = line.Split(';').Where(x => !String.IsNullOrWhiteSpace(x));
-                var paramIndex = 0;
-                resultUnit.Values = new System.Collections.Concurrent.ConcurrentDictionary<string, object>(values.ToDictionary(x => headers[paramIndex++].Trim(), x => (object)x));
-
-                resultUnit.TimeStamp = DateTime.Now; ;// sinceWhen;
+                var resultUnit = ConvertLineToUnit(line);
 
                 result.Add(resultUnit);
             }
@@ -64,6 +72,16 @@ namespace Smarterdam.DataSource
         public void SetDate(DateTime newDate)
         {
             
+        }
+
+
+        public DateTime GetLastTimestamp(int measurementId)
+        {
+            var lastLine = File.ReadAllLines(_filePath).LastOrDefault();
+            if (lastLine == null) return DateTime.Now;
+
+            var unit = ConvertLineToUnit(lastLine);
+            return (DateTime)unit.Values["TimeStamp"];
         }
     }
 }

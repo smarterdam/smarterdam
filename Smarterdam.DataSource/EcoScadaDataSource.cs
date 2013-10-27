@@ -103,6 +103,11 @@ namespace Smarterdam.DataSource
             });
         }
 
+        public DateTime GetLastTimestamp(int measurementId)
+        {
+            return DateTime.Now;
+        }
+
         private CompositeType[] GetMeasurementData(int measurementId, DateTime from, DateTime to)
         {
             try

@@ -11,9 +11,8 @@ namespace Smarterdam.Client
     public class IntelligenceManager : IIntelligenceManager
     {
         private FilterParameters parameters;
-        private IForecastResultRepository resultsRepository;
-
-        private DateTime trainUntil;
+        private readonly IForecastResultRepository resultsRepository;
+        private readonly ITestStartDateProvider testStartDateProvider;
 
         public class Entity
         {
@@ -26,21 +25,22 @@ namespace Smarterdam.Client
             public string Validity { get; set; }
         }
 
-        public IntelligenceManager(IForecastResultRepository repository)
+        public IntelligenceManager(IForecastResultRepository repository, ITestStartDateProvider testStartDateProvider)
         {
             this.resultsRepository = repository;
+            this.testStartDateProvider = testStartDateProvider;
         }
 
         public virtual PipelinePack ComposePipeline(Commands command, string id)
         {
-            trainUntil = DateTime.Now.AddDays(-3);
-
             List<List<float>> DbRealValue = new List<List<float>>();
             List<DateTime> DbDateTime = new List<DateTime>();
 
-            var onlinePipeline = ComposeOnPipeline(id);
+            var _id = Int32.Parse(id);
 
-            var offlinePipeline = ComposeOffPipeline();
+            var onlinePipeline = ComposeOnPipeline(_id);
+
+            var offlinePipeline = ComposeOffPipeline(_id);
 
             var databasePipeline = ComposeDbPipeline();
 
@@ -52,27 +52,29 @@ namespace Smarterdam.Client
             return sourcePipeline;
         }
 
-        protected virtual StreamPipeline ComposeOnPipeline(string id)
+        protected virtual StreamPipeline ComposeOnPipeline(int id)
         {
             var onlinePipeline = new StreamPipeline();
 
             parameters = new FilterParameters();
 
-            //trainingSize = 1056;
+            var trainUntil = testStartDateProvider.GetTimestampOfTestStart(id);
 
             onlinePipeline.Register(new onNeuralPredictionFilter(parameters, trainUntil));
             onlinePipeline.Register(new onErrorCalculationFilter(parameters));
             
-            onlinePipeline.Register(new ResultOutputFilter(resultsRepository) { MeasurementId = Int32.Parse(id)});
+            onlinePipeline.Register(new ResultOutputFilter(resultsRepository) { MeasurementId = id});
 
             return onlinePipeline;
         }
 
-        protected virtual StreamPipeline ComposeOffPipeline()
+        protected virtual StreamPipeline ComposeOffPipeline(int id)
         {
             var offlinePipeline = new StreamPipeline();
 
             Dictionary<string, int> time = new Dictionary<string, int>();
+
+            var trainUntil = testStartDateProvider.GetTimestampOfTestStart(id);
 
             offlinePipeline.Register(new offPredictionFittingFilter(parameters, trainUntil, time));
 

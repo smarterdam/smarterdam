@@ -14,17 +14,16 @@ using Smarterdam.Pipelines;
 
 namespace Smarterdam.Client
 {
-    public class StreamServerCallback : IStreamServerCallback
+    public class ThreadsStarter : IThreadsStarter
     {
         PipelinePack pipelines = null;
         Queue<DataStreamUnit>[] stream;
-        string filename = null;
 
         private readonly IIntelligenceManager manager;
         private readonly IMessageQueue messageQueue;
 
         [Inject]
-        public StreamServerCallback(IIntelligenceManager manager, IMessageQueue messageQueue)
+        public ThreadsStarter(IIntelligenceManager manager, IMessageQueue messageQueue)
         {
             this.manager = manager;
             this.messageQueue = messageQueue;
@@ -65,15 +64,5 @@ namespace Smarterdam.Client
                 }
             }
         }
-
-        private string GetFileName()
-        {
-            if (filename == null)
-            {
-                filename = String.Format("timelog_{0}.txt", Guid.NewGuid());
-            }
-            return filename;
-        }
-
     }
 }

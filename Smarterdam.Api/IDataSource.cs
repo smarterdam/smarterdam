@@ -13,6 +13,8 @@ namespace Smarterdam.Api
         IEnumerable<DataStreamUnit> GetNewData(DateTime sinceWhen, int measurementId);
         IEnumerable<DataStreamUnit> GetNewData(int measurementId);
 
+        DateTime GetLastTimestamp(int measurementId);
+
         void SetDate(DateTime newDate);
     }
 }

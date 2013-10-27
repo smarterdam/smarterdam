@@ -22,6 +22,7 @@ namespace Smarterdam.Tests
                 {
                     kernel.Rebind<IMessageQueue>().To<MockMessageQueue>();
                     kernel.Rebind<IForecastResultRepository>().To<MockResultsRepository>();
+                    kernel.Rebind<ITestStartDateProvider>().To<MockTestStartDateProvider>();
                 });
 
             var client = SmarterdamFactory.CreateClient();

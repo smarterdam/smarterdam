@@ -29,8 +29,9 @@ namespace Smarterdam.Client
             kernel.Bind<IDataSource>().To<EcoScadaDataSource>();
             kernel.Bind<IDataGenerator>().To<RabbitMQDataGenerator>();
             kernel.Bind<IQueryParser>().To<QueryParser>();
-            kernel.Bind<IStreamServerCallback>().To<StreamServerCallback>();
+            kernel.Bind<IThreadsStarter>().To<ThreadsStarter>();
             kernel.Bind<IForecastResultRepository>().To<MongoDbForecastResultRepository>();
+            kernel.Bind<ITestStartDateProvider>().To<TestStartDateProvider>();
 
             kernel.Bind<IMessageQueue>().To<SimpleMessageQueue>();
 

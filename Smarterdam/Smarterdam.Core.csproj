@@ -63,7 +63,8 @@
     <Compile Include="Client\IntelligenceManager.cs" />
     <Compile Include="Client\IQueryParser.cs" />
     <Compile Include="Client\ISmarterdamClient.cs" />
-    <Compile Include="Client\IStreamServerCallback.cs" />
+    <Compile Include="Client\ITestStartDateProvider.cs" />
+    <Compile Include="Client\IThreadsStarter.cs" />
     <Compile Include="Client\PipelinePack.cs" />
     <Compile Include="Client\QueryParser.cs" />
     <Compile Include="Client\RabbitMQAdapter.cs" />
@@ -71,7 +72,8 @@
     <Compile Include="Client\SmarterdamClient.cs" />
     <Compile Include="Client\SmarterdamFactory.cs" />
     <Compile Include="Client\Starter.cs" />
-    <Compile Include="Client\StreamServerCallback.cs" />
+    <Compile Include="Client\TestStartDateProvider.cs" />
+    <Compile Include="Client\ThreadsStarter.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="DataAccess\DbEntities\DbForecastResult.cs" />
     <Compile Include="DataAccess\FileForecastResultRepository.cs" />

@@ -154,7 +154,8 @@ namespace Smarterdam.Models.NeuralNetwork
             for (int j = 0; j < settings.energyLags.Count; j++)
             {
                 var energyValue = source.timeseries[counter - (settings.energyLags[j] * timestampNumber)];
-                InputVector.Add((energyValue - _minValue) / (_maxValue - _minValue));
+                var normalizedValue = _maxValue != _minValue ? (energyValue - _minValue)/(_maxValue - _minValue) : 0.5;
+                InputVector.Add(normalizedValue);
             }
 
             return InputVector;
@@ -173,7 +174,10 @@ namespace Smarterdam.Models.NeuralNetwork
         {
             List<double> OutputVector = new List<double>();
 
-            OutputVector.Add((source.timeseries[counter] - minValue) / (maxValue - minValue));
+            var energyValue = source.timeseries[counter];
+            var normalizedValue = maxValue != minValue ? (energyValue - minValue) / (maxValue - minValue) : 0.5;
+            OutputVector.Add(normalizedValue);
+            
             return OutputVector;
         }
     }

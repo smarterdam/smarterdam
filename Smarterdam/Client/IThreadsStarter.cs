@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Smarterdam.Client
 {
-    public interface IStreamServerCallback
+    public interface IThreadsStarter
     {
         void StartThreads(Commands command, string measurementId);
     }

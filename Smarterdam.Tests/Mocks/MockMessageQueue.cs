@@ -15,7 +15,7 @@ namespace Smarterdam.Tests.Mocks
             var timeStamp = DateTime.Now;
 
             var values = new ConcurrentDictionary<string, object>();
-            values["Value"] = 50000;
+            values["Value"] = 50000.0;
             values["TimeStamp"] = timeStamp;
 
             var unit = new DataStreamUnit() {TimeStamp = timeStamp, Values = values};
