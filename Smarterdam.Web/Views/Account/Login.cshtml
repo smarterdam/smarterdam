@@ -39,29 +39,29 @@
 
         </style>
     </head>
+    <body>
+        <div class="container">
+            <div class="page-header text-center">
+                <h2>Smarterdam.org - a real time data processing framework for decision support</h2>
+            </div>
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin" }))
+            {
+                <h2 class="form-signin-heading">Please sign in</h2>
+                @Html.TextBox("username", "", new { @class = "input-block-level", placeholder = "Login"})
+                @Html.Password("password", "", new { @class = "input-block-level", placeholder = "Password"})
+                <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+            }
+        </div>
+        <div class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="navbar-header">            
+                <ul class="nav navbar-nav">                
+                    <li>
+                        <a class="navbar-link" href="https://github.com/smarterdam">Source Code</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+    </body>
 </html>
-<body>
-    <div class="container">
-        <div class="page-header text-center">
-            <h2>Smarterdam.org - a real time data processing framework for decision support</h2>
-        </div>
-        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin" }))
-        {
-            <h2 class="form-signin-heading">Please sign in</h2>
-            @Html.TextBox("username", "", new { @class = "input-block-level", placeholder = "Login"})
-            @Html.Password("password", "", new { @class = "input-block-level", placeholder = "Password"})
-            <button class="btn btn-large btn-primary" type="submit">Sign in</button>
-        }
-    </div>
-     <div class="navbar navbar-inverse navbar-fixed-bottom">
-        <div class="navbar-header">            
-            <ul class="nav navbar-nav">                
-                <li>
-                <a class="navbar-link" href="https://github.com/smarterdam">Source Code</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-</body>

@@ -5,55 +5,90 @@
     ViewBag.Title = "Index";
 }
 
-@Scripts.Render("~/bundles/jquery")  
-<script type="text/javascript">
-    $(function () {
-        $("#start_btn").click(function () {
-            var measurement_id = $("#measurements_dropdown").val();
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        $(function () {
+            $("#start_btn").click(function () {
+                var measurement_id = $("#measurements_dropdown").val();
+
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + "/Home/Go",
+                    data: { id: measurement_id },
+                    beforeSend: function () {
+                        $("#loading").show();
+                        $("#start_batch_btn #start_btn").attr("disabled", "disabled");
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                        $("#start_batch_btn #start_btn").removeAttr("disabled");
+                    }
+                });
+            });
+
+            $("#start_batch_btn").click(function () {
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + "/Home/BatchGo",
+                    beforeSend: function () {
+                        $("#loading").show();
+                        $("#start_batch_btn #start_btn").attr("disabled", "disabled");
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                        $("#start_batch_btn #start_btn").removeAttr("disabled");
+                    }
+                });
+            });
+        })
+
+        function ShowGraph(id) {
             $.ajax({
                 contentType: "application/json; charset=utf-8",
-                url: window.location.origin + "/Home/Go",
-                data: { id: measurement_id },
+                url: window.location.origin + "/Home/Status",
+                data: { id: id },
                 beforeSend: function () {
                     $("#loading").show();
-                    $("#start_batch_btn #start_btn").attr("disabled", "disabled");
                 },
                 complete: function () {
                     $("#loading").hide();
-                    $("#start_batch_btn #start_btn").removeAttr("disabled");
-                }
-            });
-        });
-        
-        $("#start_batch_btn").click(function () {
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                url: window.location.origin + "/Home/BatchGo",
-                beforeSend: function () {
-                    $("#loading").show();
-                    $("#start_batch_btn #start_btn").attr("disabled", "disabled");
                 },
-                complete: function () {
-                    $("#loading").hide();
-                    $("#start_batch_btn #start_btn").removeAttr("disabled");
+                success: function (response) {
+                    $("#chartPlaceholder").html(response);
                 }
             });
-        });
-    })
-</script>
-<input type="button" id="start_batch_btn" value="Batch Go" />
-@Html.DropDownList("measurements_dropdown", Model.Measurements)
-<input type="button" id="start_btn" value="Go" />
-<div style="display: none" id="loading">Loading...</div>
-<br />
-<br />
-<a href="/Home/BatchResults">Batch results</a>
-<br />
-<br />
-@foreach (var item in Model.CurrentTasks)
-{
-    <div>
-        <a href="/Home/Status?id=@item">@item</a>
+        }
+    </script>
+</head>
+<body>
+    <div class="row">
+        <div class="col col-lg-2">
+            <input type="button" id="start_batch_btn" value="Batch Go" />
+            @Html.DropDownList("measurements_dropdown", Model.Measurements)
+            <input type="button" id="start_btn" value="Go" />
+            <div style="display: none" id="loading">Loading...</div>
+            <br />
+            <br />
+            <a href="/Home/BatchResults">Batch results</a>
+            <br />
+            <br />
+            @foreach (var item in Model.CurrentTasks)
+            {
+                <div>
+                    <a class="showGraph btn-link" onclick="ShowGraph(@item)" href="#">@item</a>
+                </div>
+            }
+        </div>
+        <div class="col col-lg-10" id="chartPlaceholder">
+        </div>
     </div>
-}
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
