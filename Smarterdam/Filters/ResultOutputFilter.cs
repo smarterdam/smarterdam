@@ -31,6 +31,7 @@ namespace Smarterdam.Filters
                 if (!_purged)
                 {
                     repository.Purge(this.MeasurementId);
+                    repository.Create(this.MeasurementId);
                     _purged = true;
                 }
 
@@ -43,7 +44,7 @@ namespace Smarterdam.Filters
                 result.RealValue = data[0].Values["Value"] as double?;
                 result.PredictedValue = data[0].Values["PredictedValue"] as double?;
 
-                repository.Add(result);
+                repository.Add(this.MeasurementId, result);
             }
             catch (Exception e)
             {

@@ -39,5 +39,22 @@ namespace Smarterdam.Tests.Mocks
         {
             return new List<int>();
         }
+
+
+        public void Add(int measurementId, ForecastResult result)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Forecast Get(int measurementId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Forecast Create(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

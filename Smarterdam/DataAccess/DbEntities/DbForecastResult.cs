@@ -9,9 +9,6 @@ namespace Smarterdam.DataAccess.DbEntities
 {
     public class DbForecastResult
     {
-        public ObjectId Id { get; set; }
-
-        public int MeasurementID { get; set; }
         public DateTime TimeStamp { get; set; }
         public double? RealValue { get; set; }
         public double? PredictedValue { get; set; }
@@ -19,7 +16,6 @@ namespace Smarterdam.DataAccess.DbEntities
 
         public DbForecastResult(ForecastResult source)
         {
-            this.MeasurementID = source.MeasurementID;
             this.TimeStamp = source.TimeStamp;
             this.RealValue = source.RealValue;
             this.PredictedValue = source.PredictedValue;
@@ -29,7 +25,6 @@ namespace Smarterdam.DataAccess.DbEntities
         public ForecastResult ConvertBack()
         {
             var result = new ForecastResult();
-            result.MeasurementID = MeasurementID;
             result.TimeStamp = TimeStamp;
             result.RealValue = RealValue;
             result.PredictedValue = PredictedValue;

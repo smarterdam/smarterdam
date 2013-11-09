@@ -75,11 +75,13 @@
     <Compile Include="Client\TestStartDateProvider.cs" />
     <Compile Include="Client\ThreadsStarter.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="DataAccess\DbEntities\DbForecast.cs" />
     <Compile Include="DataAccess\DbEntities\DbForecastResult.cs" />
     <Compile Include="DataAccess\FileForecastResultRepository.cs" />
     <Compile Include="DataAccess\IForecastResultRepository.cs" />
     <Compile Include="DataAccess\IResultRepository.cs" />
     <Compile Include="DataAccess\MongoDbForecastResultRepository.cs" />
+    <Compile Include="Entities\Forecast.cs" />
     <Compile Include="Entities\ForecastResult.cs" />
     <Compile Include="Entities\IPipelineResult.cs" />
     <Compile Include="Filters\ResultOutputFilter.cs" />

@@ -76,6 +76,7 @@ namespace Smarterdam.Web.Controllers
         [Authorize]
         public ActionResult BatchResults(int cat = 50)
         {
+            Logging.Debug("Entered BatchResults");
             var model = new StatusViewModel();
             model.ChartData = "";
 
@@ -83,22 +84,29 @@ namespace Smarterdam.Web.Controllers
             {
                 var tasks = repository.GetTasks();
 
-                var values = new List<ForecastResult>();
+                Logging.Debug("Tasks length:{0}", tasks.Count());
+
+                var values = new List<Forecast>();
 
                 foreach (var task in tasks)
                 {
-                    var forecastResult = repository.GetLast(task);
-                    if (forecastResult.Error.HasValue && !double.IsNaN(forecastResult.Error.Value))
+                    Logging.Debug("Start task {0}", task);
+                    var forecast = repository.Get(task);
+                    Logging.Debug("Forecast result error: {0}", forecast.Error);
+                    if (forecast.Error.HasValue && !double.IsNaN(forecast.Error.Value))
                     {
-                        values.Add(forecastResult);
+                        values.Add(forecast);
                     }
                 }
 
+                Logging.Debug("Foreach finished");
                 var errors = values.Select(x => x.Error.Value);
                 var minError = errors.Min();
                 if (double.IsNaN(minError)) minError = 0;
                 var maxError = errors.Max();
                 var gap = (maxError - minError) / cat;
+
+                Logging.Debug("Start bucketing");
 
                 var buckets = new int[cat];
                 foreach (var value in values)
@@ -112,8 +120,10 @@ namespace Smarterdam.Web.Controllers
                 int i = 0;
                 double lowerBound = 0;
                 double upperBound = 0;
+                Logging.Debug("starting foreach");
                 foreach (var q in buckets)
                 {
+                    Logging.Debug("Bucket {0}", q);
                     i++;
                     dynamic value = new ExpandoObject();
 
@@ -124,6 +134,8 @@ namespace Smarterdam.Web.Controllers
                     value.Quantity = q;
                     result.Add(value);
                 }
+
+                Logging.Debug("Finished bucketing");
 
                 model.ChartData = JsonConvert.SerializeObject(result);
 
@@ -150,7 +162,7 @@ namespace Smarterdam.Web.Controllers
 
             try
             {
-                var results = repository.GetAll(Int32.Parse(id));
+                var results = repository.Get(Int32.Parse(id)).Results;
                 var values = new List<dynamic>();
 
                 foreach (var result in results.OrderBy(x => x.TimeStamp))

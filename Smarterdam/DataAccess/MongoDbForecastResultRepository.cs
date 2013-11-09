@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using MongoDB.Driver.Builders;
 using Smarterdam.DataAccess.DbEntities;
 using Smarterdam.Entities;
+using Smarterdam.Log;
 
 namespace Smarterdam.DataAccess
 {
@@ -13,48 +15,58 @@ namespace Smarterdam.DataAccess
     {
         private const string ConnectionString = "mongodb://localhost/?safe=true";
         private readonly MongoServer server;
-        private MongoCollection<DbForecastResult> resultCollection;
+        private MongoCollection<DbForecast> forecastCollection;
         
         public MongoDbForecastResultRepository()
         {
             var client = new MongoClient(ConnectionString);
             server = client.GetServer();
             var smarterdamDb = server.GetDatabase("smarterdam");
-            resultCollection = smarterdamDb.GetCollection<DbForecastResult>("forecast_results");
+            forecastCollection = smarterdamDb.GetCollection<DbForecast>("forecasts");
         }
 
         public void Purge(int id)
         {
-            var query = Query.EQ("MeasurementID", id);
-            resultCollection.Remove(query);
+            var query = Query.EQ("MeasurementId", id);
+            forecastCollection.Remove(query);
         }
 
-        public void Add(ForecastResult result)
+        public Forecast Create(int id)
         {
-            resultCollection.Save(new DbForecastResult(result));
+            var forecast = new Forecast() { MeasurementId = id };
+            var dbForecast = new DbForecast(forecast);
+            forecastCollection.Save(dbForecast);
+            return forecast;
         }
 
-        public IEnumerable<ForecastResult> GetAll(int measurementId)
+        public void Add(int measurementId, ForecastResult result)
         {
-            var query = Query.EQ("MeasurementID", measurementId);
-            foreach (var result in resultCollection.Find(query))
-            {
-                yield return result.ConvertBack();
-            }
+            var forecast = forecastCollection.AsQueryable().FirstOrDefault(x => x.MeasurementId == measurementId);
+            forecast.Results.Add(new DbForecastResult(result));
+            forecast.Error = result.Error;
+            forecastCollection.Save(forecast);
+        }
+
+        public Forecast Get(int measurementId)
+        {
+            var forecast = forecastCollection.AsQueryable().FirstOrDefault(x => x.MeasurementId == measurementId);
+            return forecast.ConvertBack();
         }
 
         public ForecastResult GetLast(int measurementId)
         {
-            var query = Query.EQ("MeasurementID", measurementId);
+            Logging.Debug("Start 'GetLast' query");
 
-            var lastEntry = resultCollection.Find(query).OrderBy(x => x.TimeStamp).LastOrDefault();
+            var forecast = forecastCollection.AsQueryable().FirstOrDefault(x => x.MeasurementId == measurementId);
+            var lastEntry = forecast.Results.LastOrDefault();
+            Logging.Debug("Finished 'GetLast' query");
 
             return lastEntry.ConvertBack();
         }
 
         public IEnumerable<int> GetTasks()
         {
-            var taskIds = resultCollection.FindAll().Select(x => x.MeasurementID).Distinct();
+            var taskIds = forecastCollection.FindAll().Select(x => x.MeasurementId).Distinct();
             return taskIds;
         }
     }

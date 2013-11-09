@@ -122,5 +122,22 @@ namespace Smarterdam.DataAccess
                 throw;
             }
         }
+
+
+        public void Add(int measurementId, ForecastResult result)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Forecast Get(int measurementId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Forecast Create(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

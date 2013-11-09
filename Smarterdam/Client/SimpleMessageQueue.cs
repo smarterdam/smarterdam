@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Smarterdam.Client
         private int? measurementId = null;
         private static object _lockObject = new Object();
 
-        private Dictionary<string, Queue<DataStreamUnit>> _queues = new Dictionary<string, Queue<DataStreamUnit>>();
+        private ConcurrentDictionary<string, Queue<DataStreamUnit>> _queues = new ConcurrentDictionary<string, Queue<DataStreamUnit>>();
 
         public SimpleMessageQueue(IDataSource dataSource)
         {
@@ -38,7 +39,7 @@ namespace Smarterdam.Client
 
             if (!_queues.ContainsKey(queueId))
             {
-                _queues.Add(queueId, new Queue<DataStreamUnit>(innerExchange));
+                _queues.TryAdd(queueId, new Queue<DataStreamUnit>(innerExchange));
             }
             
             if(!_queues[queueId].Any()) throw new EndOfStreamException();
