@@ -41,10 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NewEcoScadaDataSource.cs" />
     <Compile Include="EcoScadaDataSource.cs" />
     <Compile Include="FileDataSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\EcoScadaService\Reference.cs">
+    <Compile Include="Service References\EcoSCADAService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\NewEcoSCADADataService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -55,45 +61,58 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\EcoScadaService\EcoSCADAData.wsdl" />
-    <None Include="Service References\EcoScadaService\EcoSCADAService.xsd">
+    <None Include="Service References\EcoSCADAService\EcoSCADAData.wsdl" />
+    <None Include="Service References\EcoSCADAService\EcoSCADAService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\EcoScadaService\EcoSCADAService1.xsd">
+    <None Include="Service References\EcoSCADAService\EcoSCADAService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\EcoScadaService\EcoSCADAService2.xsd">
+    <None Include="Service References\EcoSCADAService\EcoSCADAService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\EcoScadaService\Smarterdam.DataSource.EcoScadaService.Building.datasource">
+    <None Include="Service References\EcoSCADAService\Smarterdam.DataSource.EcoSCADAService.Building.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EcoScadaService\Smarterdam.DataSource.EcoScadaService.BuildingConsumption.datasource">
+    <None Include="Service References\EcoSCADAService\Smarterdam.DataSource.EcoSCADAService.BuildingConsumption.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EcoScadaService\Smarterdam.DataSource.EcoScadaService.CompositeType.datasource">
+    <None Include="Service References\EcoSCADAService\Smarterdam.DataSource.EcoSCADAService.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EcoScadaService\Smarterdam.DataSource.EcoScadaService.TableConnections.datasource">
+    <None Include="Service References\EcoSCADAService\Smarterdam.DataSource.EcoSCADAService.TableConnections.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EcoScadaService\Smarterdam.DataSource.EcoScadaService.UserStates.datasource">
+    <None Include="Service References\EcoSCADAService\Smarterdam.DataSource.EcoSCADAService.UserStates.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\EcoScadaService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EcoScadaService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EcoScadaService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EcoScadaService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
+    <None Include="Service References\NewEcoSCADADataService\EcoSCADADataService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewEcoSCADADataService\EcoSCADADataService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewEcoSCADADataService\EcoSCADADataService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewEcoSCADADataService\EcoSCADADataService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewEcoSCADADataService\EcoSCADADataService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NewEcoSCADADataService\Service1.wsdl" />
+    <None Include="Service References\NewEcoSCADADataService\Smarterdam.DataSource.NewEcoSCADADataService.BuildingP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\NewEcoSCADADataService\Smarterdam.DataSource.NewEcoSCADADataService.Data.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\NewEcoSCADADataService\Smarterdam.DataSource.NewEcoSCADADataService.MeasurementP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\NewEcoSCADADataService\Smarterdam.DataSource.NewEcoSCADADataService.MSResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -107,7 +126,38 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\EcoScadaService\EcoSCADAService.disco" />
+    <WCFMetadataStorage Include="Service References\EcoSCADAService\" />
+    <WCFMetadataStorage Include="Service References\NewEcoSCADADataService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EcoSCADAService\EcoSCADAService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EcoSCADAService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EcoSCADAService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EcoSCADAService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\NewEcoSCADADataService\EcoSCADADataService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\NewEcoSCADADataService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\NewEcoSCADADataService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\NewEcoSCADADataService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

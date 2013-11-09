@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Smarterdam.DataSource.EcoScadaService {
+namespace Smarterdam.DataSource.EcoSCADAService {
     using System.Runtime.Serialization;
     using System;
     
@@ -149,7 +149,7 @@ namespace Smarterdam.DataSource.EcoScadaService {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<Smarterdam.DataSource.EcoScadaService.Faces> SatisfactionField;
+        private System.Nullable<Smarterdam.DataSource.EcoSCADAService.Faces> SatisfactionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double TodayEconomyField;
@@ -272,7 +272,7 @@ namespace Smarterdam.DataSource.EcoScadaService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<Smarterdam.DataSource.EcoScadaService.Faces> Satisfaction {
+        public System.Nullable<Smarterdam.DataSource.EcoSCADAService.Faces> Satisfaction {
             get {
                 return this.SatisfactionField;
             }
@@ -350,7 +350,7 @@ namespace Smarterdam.DataSource.EcoScadaService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Smarterdam.DataSource.EcoScadaService.InstanceCugPair[] AvailableInstancesCugsField;
+        private Smarterdam.DataSource.EcoSCADAService.InstanceCugPair[] AvailableInstancesCugsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool authStateField;
@@ -390,7 +390,7 @@ namespace Smarterdam.DataSource.EcoScadaService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Smarterdam.DataSource.EcoScadaService.InstanceCugPair[] AvailableInstancesCugs {
+        public Smarterdam.DataSource.EcoSCADAService.InstanceCugPair[] AvailableInstancesCugs {
             get {
                 return this.AvailableInstancesCugsField;
             }
@@ -809,68 +809,68 @@ namespace Smarterdam.DataSource.EcoScadaService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EcoScadaService.IEcoSCADAData")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EcoSCADAService.IEcoSCADAData")]
     public interface IEcoSCADAData {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetSumPerPeriod", ReplyAction="http://tempuri.org/IEcoSCADAData/GetSumPerPeriodResponse")]
-        double GetSumPerPeriod(int measurementId, System.DateTime fr, System.DateTime to, Smarterdam.DataSource.EcoScadaService.BuildingState bs, string guid);
+        double GetSumPerPeriod(int measurementId, System.DateTime fr, System.DateTime to, Smarterdam.DataSource.EcoSCADAService.BuildingState bs, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetMeasurementsPerPeriod", ReplyAction="http://tempuri.org/IEcoSCADAData/GetMeasurementsPerPeriodResponse")]
-        Smarterdam.DataSource.EcoScadaService.CompositeType[] GetMeasurementsPerPeriod(int measurementId, System.DateTime fr, System.DateTime to, System.Nullable<Smarterdam.DataSource.EcoScadaService.BuildingState> bs, string guid);
+        Smarterdam.DataSource.EcoSCADAService.CompositeType[] GetMeasurementsPerPeriod(int measurementId, System.DateTime fr, System.DateTime to, System.Nullable<Smarterdam.DataSource.EcoSCADAService.BuildingState> bs, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetReductionsCo2Kg", ReplyAction="http://tempuri.org/IEcoSCADAData/GetReductionsCo2KgResponse")]
         double GetReductionsCo2Kg(int measurementId, System.DateTime fr, System.DateTime to, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetDailyAverage", ReplyAction="http://tempuri.org/IEcoSCADAData/GetDailyAverageResponse")]
-        Smarterdam.DataSource.EcoScadaService.CompositeType[] GetDailyAverage(int measurementId, System.DateTime baseDateTime, Smarterdam.DataSource.EcoScadaService.AverageFormat mode, string guid);
+        Smarterdam.DataSource.EcoSCADAService.CompositeType[] GetDailyAverage(int measurementId, System.DateTime baseDateTime, Smarterdam.DataSource.EcoSCADAService.AverageFormat mode, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetCugList", ReplyAction="http://tempuri.org/IEcoSCADAData/GetCugListResponse")]
-        Smarterdam.DataSource.EcoScadaService.TableConnections[] GetCugList(System.Nullable<int> instanceId, System.Nullable<int> userId, string guid);
+        Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetCugList(System.Nullable<int> instanceId, System.Nullable<int> userId, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetBuildingList", ReplyAction="http://tempuri.org/IEcoSCADAData/GetBuildingListResponse")]
-        Smarterdam.DataSource.EcoScadaService.TableConnections[] GetBuildingList(int cugid, string guid);
+        Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetBuildingList(int cugid, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetMeasurementsList", ReplyAction="http://tempuri.org/IEcoSCADAData/GetMeasurementsListResponse")]
-        Smarterdam.DataSource.EcoScadaService.TableConnections[] GetMeasurementsList(int BuildingId, string guid);
+        Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetMeasurementsList(int BuildingId, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetCarsKilometers", ReplyAction="http://tempuri.org/IEcoSCADAData/GetCarsKilometersResponse")]
-        Smarterdam.DataSource.EcoScadaService.CompositeType[] GetCarsKilometers(int measurementid, System.DateTime from, System.DateTime to, string guid);
+        Smarterdam.DataSource.EcoSCADAService.CompositeType[] GetCarsKilometers(int measurementid, System.DateTime from, System.DateTime to, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetInstances", ReplyAction="http://tempuri.org/IEcoSCADAData/GetInstancesResponse")]
-        Smarterdam.DataSource.EcoScadaService.TableConnections[] GetInstances(System.Nullable<int> userId, string guid);
+        Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetInstances(System.Nullable<int> userId, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetBuildingWorkingHours", ReplyAction="http://tempuri.org/IEcoSCADAData/GetBuildingWorkingHoursResponse")]
-        Smarterdam.DataSource.EcoScadaService.CompositeType[] GetBuildingWorkingHours(int buildingId, System.DateTime From, System.DateTime to, string guid);
+        Smarterdam.DataSource.EcoSCADAService.CompositeType[] GetBuildingWorkingHours(int buildingId, System.DateTime From, System.DateTime to, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetReductionsCo2Relative", ReplyAction="http://tempuri.org/IEcoSCADAData/GetReductionsCo2RelativeResponse")]
         double GetReductionsCo2Relative(int SolarPanelMeasurementId, int ConsumptionMeasurementId, System.DateTime fr, System.DateTime to, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/UserExists", ReplyAction="http://tempuri.org/IEcoSCADAData/UserExistsResponse")]
-        Smarterdam.DataSource.EcoScadaService.UserStates UserExists(string user, string password);
+        Smarterdam.DataSource.EcoSCADAService.UserStates UserExists(string user, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetMeasurementsInfo", ReplyAction="http://tempuri.org/IEcoSCADAData/GetMeasurementsInfoResponse")]
-        Smarterdam.DataSource.EcoScadaService.TableConnections GetMeasurementsInfo(int measurementId, string guid);
+        Smarterdam.DataSource.EcoSCADAService.TableConnections GetMeasurementsInfo(int measurementId, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetUserInfo", ReplyAction="http://tempuri.org/IEcoSCADAData/GetUserInfoResponse")]
-        Smarterdam.DataSource.EcoScadaService.UserStates GetUserInfo(string user, string guid);
+        Smarterdam.DataSource.EcoSCADAService.UserStates GetUserInfo(string user, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetListOfBuildingsByUserId", ReplyAction="http://tempuri.org/IEcoSCADAData/GetListOfBuildingsByUserIdResponse")]
-        Smarterdam.DataSource.EcoScadaService.TableConnections[] GetListOfBuildingsByUserId(int userId, string guid);
+        Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetListOfBuildingsByUserId(int userId, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetBuildingProperties", ReplyAction="http://tempuri.org/IEcoSCADAData/GetBuildingPropertiesResponse")]
-        Smarterdam.DataSource.EcoScadaService.Building[] GetBuildingProperties(System.Nullable<int> BuildingId, string guid);
+        Smarterdam.DataSource.EcoSCADAService.Building[] GetBuildingProperties(System.Nullable<int> BuildingId, string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEcoSCADAData/GetDayNightRatio", ReplyAction="http://tempuri.org/IEcoSCADAData/GetDayNightRatioResponse")]
-        Smarterdam.DataSource.EcoScadaService.BuildingConsumption GetDayNightRatio(int measurementId, System.DateTime date, string guid);
+        Smarterdam.DataSource.EcoSCADAService.BuildingConsumption GetDayNightRatio(int measurementId, System.DateTime date, string guid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IEcoSCADADataChannel : Smarterdam.DataSource.EcoScadaService.IEcoSCADAData, System.ServiceModel.IClientChannel {
+    public interface IEcoSCADADataChannel : Smarterdam.DataSource.EcoSCADAService.IEcoSCADAData, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class EcoSCADADataClient : System.ServiceModel.ClientBase<Smarterdam.DataSource.EcoScadaService.IEcoSCADAData>, Smarterdam.DataSource.EcoScadaService.IEcoSCADAData {
+    public partial class EcoSCADADataClient : System.ServiceModel.ClientBase<Smarterdam.DataSource.EcoSCADAService.IEcoSCADAData>, Smarterdam.DataSource.EcoSCADAService.IEcoSCADAData {
         
         public EcoSCADADataClient() {
         }
@@ -891,11 +891,11 @@ namespace Smarterdam.DataSource.EcoScadaService {
                 base(binding, remoteAddress) {
         }
         
-        public double GetSumPerPeriod(int measurementId, System.DateTime fr, System.DateTime to, Smarterdam.DataSource.EcoScadaService.BuildingState bs, string guid) {
+        public double GetSumPerPeriod(int measurementId, System.DateTime fr, System.DateTime to, Smarterdam.DataSource.EcoSCADAService.BuildingState bs, string guid) {
             return base.Channel.GetSumPerPeriod(measurementId, fr, to, bs, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.CompositeType[] GetMeasurementsPerPeriod(int measurementId, System.DateTime fr, System.DateTime to, System.Nullable<Smarterdam.DataSource.EcoScadaService.BuildingState> bs, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.CompositeType[] GetMeasurementsPerPeriod(int measurementId, System.DateTime fr, System.DateTime to, System.Nullable<Smarterdam.DataSource.EcoSCADAService.BuildingState> bs, string guid) {
             return base.Channel.GetMeasurementsPerPeriod(measurementId, fr, to, bs, guid);
         }
         
@@ -903,31 +903,31 @@ namespace Smarterdam.DataSource.EcoScadaService {
             return base.Channel.GetReductionsCo2Kg(measurementId, fr, to, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.CompositeType[] GetDailyAverage(int measurementId, System.DateTime baseDateTime, Smarterdam.DataSource.EcoScadaService.AverageFormat mode, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.CompositeType[] GetDailyAverage(int measurementId, System.DateTime baseDateTime, Smarterdam.DataSource.EcoSCADAService.AverageFormat mode, string guid) {
             return base.Channel.GetDailyAverage(measurementId, baseDateTime, mode, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.TableConnections[] GetCugList(System.Nullable<int> instanceId, System.Nullable<int> userId, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetCugList(System.Nullable<int> instanceId, System.Nullable<int> userId, string guid) {
             return base.Channel.GetCugList(instanceId, userId, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.TableConnections[] GetBuildingList(int cugid, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetBuildingList(int cugid, string guid) {
             return base.Channel.GetBuildingList(cugid, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.TableConnections[] GetMeasurementsList(int BuildingId, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetMeasurementsList(int BuildingId, string guid) {
             return base.Channel.GetMeasurementsList(BuildingId, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.CompositeType[] GetCarsKilometers(int measurementid, System.DateTime from, System.DateTime to, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.CompositeType[] GetCarsKilometers(int measurementid, System.DateTime from, System.DateTime to, string guid) {
             return base.Channel.GetCarsKilometers(measurementid, from, to, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.TableConnections[] GetInstances(System.Nullable<int> userId, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetInstances(System.Nullable<int> userId, string guid) {
             return base.Channel.GetInstances(userId, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.CompositeType[] GetBuildingWorkingHours(int buildingId, System.DateTime From, System.DateTime to, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.CompositeType[] GetBuildingWorkingHours(int buildingId, System.DateTime From, System.DateTime to, string guid) {
             return base.Channel.GetBuildingWorkingHours(buildingId, From, to, guid);
         }
         
@@ -935,27 +935,27 @@ namespace Smarterdam.DataSource.EcoScadaService {
             return base.Channel.GetReductionsCo2Relative(SolarPanelMeasurementId, ConsumptionMeasurementId, fr, to, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.UserStates UserExists(string user, string password) {
+        public Smarterdam.DataSource.EcoSCADAService.UserStates UserExists(string user, string password) {
             return base.Channel.UserExists(user, password);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.TableConnections GetMeasurementsInfo(int measurementId, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.TableConnections GetMeasurementsInfo(int measurementId, string guid) {
             return base.Channel.GetMeasurementsInfo(measurementId, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.UserStates GetUserInfo(string user, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.UserStates GetUserInfo(string user, string guid) {
             return base.Channel.GetUserInfo(user, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.TableConnections[] GetListOfBuildingsByUserId(int userId, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.TableConnections[] GetListOfBuildingsByUserId(int userId, string guid) {
             return base.Channel.GetListOfBuildingsByUserId(userId, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.Building[] GetBuildingProperties(System.Nullable<int> BuildingId, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.Building[] GetBuildingProperties(System.Nullable<int> BuildingId, string guid) {
             return base.Channel.GetBuildingProperties(BuildingId, guid);
         }
         
-        public Smarterdam.DataSource.EcoScadaService.BuildingConsumption GetDayNightRatio(int measurementId, System.DateTime date, string guid) {
+        public Smarterdam.DataSource.EcoSCADAService.BuildingConsumption GetDayNightRatio(int measurementId, System.DateTime date, string guid) {
             return base.Channel.GetDayNightRatio(measurementId, date, guid);
         }
     }

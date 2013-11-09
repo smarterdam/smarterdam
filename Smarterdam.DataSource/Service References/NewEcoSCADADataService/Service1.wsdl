@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" />
+      <xsd:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" />
+      <xsd:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/EcoSCADADataService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IEcoSCADADataService_UserExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserExists" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_UserExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetListOfBuildingsForUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListOfBuildingsForUser" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetListOfBuildingsForUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListOfBuildingsForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetListOfMeasurementsForBuilding_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListOfMeasurementsForBuilding" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetListOfMeasurementsForBuilding_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListOfMeasurementsForBuildingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetBuildingProperties_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingProperties" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetBuildingProperties_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingPropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetMeasurementProperties_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementProperties" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetMeasurementProperties_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementPropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetMeasurementStat_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementStat" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetMeasurementStat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementStatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetMeasurementData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementData" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetMeasurementData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeasurementDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetAdvancedDataQuery_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdvancedDataQuery" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_GetAdvancedDataQuery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdvancedDataQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_SetSavingsForMeasurement_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetSavingsForMeasurement" />
+  </wsdl:message>
+  <wsdl:message name="IEcoSCADADataService_SetSavingsForMeasurement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetSavingsForMeasurementResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IEcoSCADADataService">
+    <wsdl:operation name="UserExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/UserExists" message="tns:IEcoSCADADataService_UserExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/UserExistsResponse" message="tns:IEcoSCADADataService_UserExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetUserInfo" message="tns:IEcoSCADADataService_GetUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetUserInfoResponse" message="tns:IEcoSCADADataService_GetUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListOfBuildingsForUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetListOfBuildingsForUser" message="tns:IEcoSCADADataService_GetListOfBuildingsForUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetListOfBuildingsForUserResponse" message="tns:IEcoSCADADataService_GetListOfBuildingsForUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListOfMeasurementsForBuilding">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetListOfMeasurementsForBuilding" message="tns:IEcoSCADADataService_GetListOfMeasurementsForBuilding_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetListOfMeasurementsForBuildingResponse" message="tns:IEcoSCADADataService_GetListOfMeasurementsForBuilding_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingProperties">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetBuildingProperties" message="tns:IEcoSCADADataService_GetBuildingProperties_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetBuildingPropertiesResponse" message="tns:IEcoSCADADataService_GetBuildingProperties_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementProperties">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetMeasurementProperties" message="tns:IEcoSCADADataService_GetMeasurementProperties_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetMeasurementPropertiesResponse" message="tns:IEcoSCADADataService_GetMeasurementProperties_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementStat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetMeasurementStat" message="tns:IEcoSCADADataService_GetMeasurementStat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetMeasurementStatResponse" message="tns:IEcoSCADADataService_GetMeasurementStat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetMeasurementData" message="tns:IEcoSCADADataService_GetMeasurementData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetMeasurementDataResponse" message="tns:IEcoSCADADataService_GetMeasurementData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvancedDataQuery">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetAdvancedDataQuery" message="tns:IEcoSCADADataService_GetAdvancedDataQuery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/GetAdvancedDataQueryResponse" message="tns:IEcoSCADADataService_GetAdvancedDataQuery_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSavingsForMeasurement">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEcoSCADADataService/SetSavingsForMeasurement" message="tns:IEcoSCADADataService_SetSavingsForMeasurement_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEcoSCADADataService/SetSavingsForMeasurementResponse" message="tns:IEcoSCADADataService_SetSavingsForMeasurement_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IEcoSCADADataService" type="tns:IEcoSCADADataService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UserExists">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/UserExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListOfBuildingsForUser">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/GetListOfBuildingsForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListOfMeasurementsForBuilding">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/GetListOfMeasurementsForBuilding" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingProperties">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/GetBuildingProperties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementProperties">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/GetMeasurementProperties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementStat">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/GetMeasurementStat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurementData">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/GetMeasurementData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvancedDataQuery">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/GetAdvancedDataQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetSavingsForMeasurement">
+      <soap:operation soapAction="http://tempuri.org/IEcoSCADADataService/SetSavingsForMeasurement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IEcoSCADADataService" binding="tns:BasicHttpBinding_IEcoSCADADataService">
+      <soap:address location="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

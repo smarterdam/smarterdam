@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/EcoSCADADataService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EcoSCADADataService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" />
+  <xs:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" />
+  <xs:complexType name="BuildingP">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErectedYear" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="ListExternalConditions" nillable="true" type="q1:ArrayOfKeyValuePairOfintstring" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="ListMeasurements" nillable="true" type="q2:ArrayOfKeyValuePairOfintstring" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Staff" type="xs:int" />
+      <xs:element minOccurs="0" name="Visitors" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BuildingP" nillable="true" type="tns:BuildingP" />
+  <xs:complexType name="MeasurementP">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FirstMeasured" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HourlyFactor" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LastMeasured" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimaryUnit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimaryUnitPerHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondaryUnit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondaryUnitPerHour" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" minOccurs="0" name="Source" type="q3:SourceType" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MeasurementP" nillable="true" type="tns:MeasurementP" />
+  <xs:complexType name="MSResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimaryUnit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimaryValue" type="xs:double" />
+      <xs:element minOccurs="0" name="SecondaryUnit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondaryValue" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MSResult" nillable="true" type="tns:MSResult" />
+</xs:schema>

@@ -6,22 +6,22 @@ using System.ServiceModel;
 using System.Text;
 using Smarterdam.Api;
 using Smarterdam.Api.Helpers;
-using Smarterdam.DataSource.EcoSCADAService;
+using Smarterdam.DataSource.NewEcoSCADADataService;
 using Smarterdam.Log;
 
 namespace Smarterdam.DataSource
 {
-    public class EcoScadaDataSource : IDataSource
+    public class NewEcoScadaDataSource : IDataSource
     {
         //private int measurementId;
         private string ACCESS_GUID = PasswordHelper.EcoScadaServicePassword;
-        private string SERVICE_URI = "http://flexible.ecoscada.com/service_test/EcoSCADAService.svc";
+        private string SERVICE_URI = "http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc";
 
-        private EcoSCADADataClient client;
+        private EcoSCADADataServiceClient client;
 
         private DateTime lastReceivedDateTime = DateTime.Now;
 
-        public EcoScadaDataSource()
+        public NewEcoScadaDataSource()
         {
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.MaxReceivedMessageSize = 2147483647;
@@ -29,7 +29,7 @@ namespace Smarterdam.DataSource
             
             var endpointAddress = new EndpointAddress(SERVICE_URI);
 
-            client = new EcoSCADADataClient(binding, endpointAddress);
+            client = new EcoSCADADataServiceClient(binding, endpointAddress);
             
         }
 
@@ -100,7 +100,7 @@ namespace Smarterdam.DataSource
             return newData.Select(x =>
             {
                 var values = new ConcurrentDictionary<string, object>();
-                values["Value"] = x.Value;
+                values["Value"] = x.PrimaryValue ?? 0.0;
                 values["TimeStamp"] = x.TimeStamp;
 
                 return new DataStreamUnit() { Values = values, TimeStamp = x.TimeStamp };
@@ -112,16 +112,15 @@ namespace Smarterdam.DataSource
             return ConvertDateForService(DateTime.Now);
         }
 
-        private CompositeType[] GetMeasurementData(int measurementId, DateTime from, DateTime to)
+        private Data[] GetMeasurementData(int measurementId, DateTime from, DateTime to)
         {
             try
             {
-                return client.GetMeasurementsPerPeriod(measurementId, ConvertDateForService(from),
-                                                       ConvertDateForService(to), null, ACCESS_GUID);
+                return client.GetMeasurementData(measurementId, ExportMode.All, dataResolution.Minutes15, ConvertDateForService(from), ConvertDateForService(to), ACCESS_GUID);
             }
             catch (System.ServiceModel.FaultException)
             {
-                return new CompositeType[0];
+                return new Data[0];
             }
         }
     }

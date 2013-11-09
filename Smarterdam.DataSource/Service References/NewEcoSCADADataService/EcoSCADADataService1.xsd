@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" />
+  <xs:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" />
+  <xs:import schemaLocation="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/EcoSCADADataService" />
+  <xs:element name="UserExists">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserExistsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserExistsResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="GetUserInfoResult" type="q1:KeyValuePairOfintstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListOfBuildingsForUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListOfBuildingsForUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="GetListOfBuildingsForUserResult" nillable="true" type="q2:ArrayOfKeyValuePairOfintstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListOfMeasurementsForBuilding">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="buildingId" type="xs:int" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" minOccurs="0" name="mode" type="q3:MeasurementType" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListOfMeasurementsForBuildingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="GetListOfMeasurementsForBuildingResult" nillable="true" type="q4:ArrayOfKeyValuePairOfintstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBuildingProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="buildingId" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBuildingPropertiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/EcoSCADADataService" minOccurs="0" name="GetBuildingPropertiesResult" nillable="true" type="q5:BuildingP" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementPropertiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/EcoSCADADataService" minOccurs="0" name="GetMeasurementPropertiesResult" nillable="true" type="q6:MeasurementP" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementStat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="referenceId" nillable="true" type="xs:int" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" minOccurs="0" name="mode" type="q7:MeaserementStatistics" />
+        <xs:element minOccurs="0" name="from" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="to" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementStatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/EcoSCADADataService" minOccurs="0" name="GetMeasurementStatResult" nillable="true" type="q8:MSResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" minOccurs="0" name="mode" type="q9:ExportMode" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" minOccurs="0" name="resolution" type="q10:dataResolution" />
+        <xs:element minOccurs="0" name="from" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="to" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMeasurementDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" minOccurs="0" name="GetMeasurementDataResult" nillable="true" type="q11:ArrayOfData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAdvancedDataQuery">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurement" type="xs:int" />
+        <xs:element minOccurs="0" name="from" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="to" type="xs:dateTime" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" minOccurs="0" name="ex" type="q12:DataExportMode" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAdvancedDataQueryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/EcoSCADAConnections" minOccurs="0" name="GetAdvancedDataQueryResult" nillable="true" type="q13:ArrayOfData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetSavingsForMeasurement">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="measurementId" type="xs:int" />
+        <xs:element minOccurs="0" name="savings" type="xs:double" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetSavingsForMeasurementResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="80c43b92-bfe0-4f80-bd62-0f0d456fd1c6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="EcoSCADADataService.xsd" MetadataType="Schema" ID="08e54376-f65f-4742-ade5-ba0f5ad14720" SourceId="1" SourceUrl="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd3" />
+    <MetadataFile FileName="EcoSCADADataService.disco" MetadataType="Disco" ID="91f31781-2c63-4ea4-adbe-7ee096046994" SourceId="1" SourceUrl="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?disco" />
+    <MetadataFile FileName="EcoSCADADataService1.xsd" MetadataType="Schema" ID="b5f36fd4-62d9-4e65-8e97-d6658165db1e" SourceId="1" SourceUrl="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd0" />
+    <MetadataFile FileName="EcoSCADADataService2.xsd" MetadataType="Schema" ID="b69b621c-41d5-4bd6-b34a-615be85aa3e4" SourceId="1" SourceUrl="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd2" />
+    <MetadataFile FileName="EcoSCADADataService3.xsd" MetadataType="Schema" ID="6e3d6cb6-c4b6-42fe-829e-f67284cf1a88" SourceId="1" SourceUrl="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd4" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="408d44a4-b116-4daa-b934-f2ee198ab656" SourceId="1" SourceUrl="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?wsdl" />
+    <MetadataFile FileName="EcoSCADADataService4.xsd" MetadataType="Schema" ID="90dace95-f62f-487e-8ff5-79da1ca48e2c" SourceId="1" SourceUrl="http://flexible.ecoscada.com/production_service/EcoSCADADataService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
