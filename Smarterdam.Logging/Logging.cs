@@ -9,8 +9,7 @@ namespace Smarterdam.Log
     public static class Logging
     {
         private static Logger logger;
-        private static bool DEBUG = false;
-
+        
         static Logging()
         {
             logger = LogManager.GetLogger("smarterdam_logger");
@@ -23,10 +22,12 @@ namespace Smarterdam.Log
 
         public static void Debug(string msg)
         {
-            if (DEBUG)
-            {
-                logger.Info(msg);
-            }
+            logger.Debug(msg);
+        }
+
+        public static void Debug(string msg, params object[] values)
+        {
+            logger.Debug(msg, values);
         }
     }
 }
