@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockDataSource.cs" />
     <Compile Include="NewEcoScadaDataSource.cs" />
     <Compile Include="EcoScadaDataSource.cs" />
     <Compile Include="FileDataSource.cs" />
