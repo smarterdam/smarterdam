@@ -10,9 +10,6 @@ namespace Smarterdam.Filters
 {
     public class onErrorCalculationFilter : BaseFilter
     {
-        private List<double> realValues;
-        private List<double> predictedValues;
-        //private List<double> absoluteErrors;
         private int counter = 0;
         private int D;
         private int testCounter = 0; //счетчик замеров в тестовой выборке
@@ -24,9 +21,6 @@ namespace Smarterdam.Filters
 
         public onErrorCalculationFilter(FilterParameters parameters)
         {
-            realValues = new List<double>();
-            predictedValues = new List<double>();
-            //absoluteErrors = new List<double>();
             this.parameters = parameters;
         }
 
@@ -39,7 +33,6 @@ namespace Smarterdam.Filters
             var dateTime = DateTime.Parse(value.Values["TimeStamp"].ToString());
             if (dateTime > waitUntil)
             {
-                testCounter++;
                 List<double> absoluteErrors = new List<double>();
                 neuralNetwork = parameters["NeuralNetwork"] as MultiLayersNN;
                 if (neuralNetwork != null)
@@ -48,20 +41,21 @@ namespace Smarterdam.Filters
                 }
 
                 var realValue = Double.Parse(value.Values["Value"].ToString());
-                var predictedValue = Double.Parse(value.Values["PredictedValue"].ToString());
-                var absoluteError = Math.Abs(predictedValue - realValue);
+                var predictedValue = value.Values["PredictedValue"] != null ? Double.Parse(value.Values["PredictedValue"].ToString()) : (double?)null;
 
-                if (realValue != 0)
+                if (predictedValue != null)
                 {
-                    counter++;
-                    mapeSum += Math.Abs(absoluteError / realValue);
+                    var absoluteError = Math.Abs(predictedValue.Value - realValue);
+
+                    if (realValue != 0)
+                    {
+                        counter++;
+                        mapeSum += Math.Abs(absoluteError/realValue);
+                    }
+
+                    testCounter++;
+                    value.Values["MAPE"] = mapeSum/testCounter;
                 }
-
-                value.Values["MAPE"] = mapeSum / testCounter;
-
-                realValues.Add(realValue);
-                predictedValues.Add(predictedValue);
-                //absoluteErrors.Add(absoluteError);
 
                 D = (int)Math.Round(absoluteErrors.Count / 1.0, MidpointRounding.AwayFromZero);
 
@@ -73,8 +67,6 @@ namespace Smarterdam.Filters
                     errorSum += absoluteErrors[i];
                 }
                 var mu = errorSum / D;
-
-                //var mu = absoluteErrors.Take(absoluteErrors.Count).Skip(absoluteErrors.Count - D).Average();
 
                 value.Values["mu"] = mu;
 
