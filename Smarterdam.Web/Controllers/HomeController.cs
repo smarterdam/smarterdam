@@ -162,7 +162,8 @@ namespace Smarterdam.Web.Controllers
 
             try
             {
-                var results = repository.Get(Int32.Parse(id)).Results;
+                var forecast = repository.Get(Int32.Parse(id));
+                var results = forecast.Results;
                 var values = new List<dynamic>();
 
                 foreach (var result in results.OrderBy(x => x.TimeStamp))
@@ -176,6 +177,7 @@ namespace Smarterdam.Web.Controllers
                 }
 
                 model.ChartData = JsonConvert.SerializeObject(values);
+                model.Error = forecast.Error;
 
                 return View(model);
             }
