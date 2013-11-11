@@ -170,6 +170,7 @@ namespace Smarterdam.Web.Controllers
                     dynamic value = new ExpandoObject();
                     value.TimeStamp = result.TimeStamp.ToString("MM.dd.yy HH:mm:ss");
                     value.ValueReal = result.RealValue.ToString().Replace(',', '.');
+                    value.ValuePredicted = result.PredictedValue.ToString().Replace(',', '.');
 
                     values.Add(value);
                 }
