@@ -14,6 +14,7 @@
                 renderTo: 'chartContainer',
                 type: 'line'
             },
+            colors: ['#2f7ed8', '#c41e3a'],
             title: {
                 text: ''
             },
@@ -49,38 +50,24 @@
             series: [
                 {
                     name: "Real",
-                    data: DrawRealGraph(eval('@Html.Raw(Model.ChartData)'))
+                    data: DrawGraph(eval('@Html.Raw(Model.ChartData)'), function (x) { return x.ValueReal; })
                 },
                 {
                     name: "Forecast",
-                    data: DrawForecastGraph(eval('@Html.Raw(Model.ChartData)'))
+                    data: DrawGraph(eval('@Html.Raw(Model.ChartData)'), function (x) { return x.ValuePredicted; })
                 }
             ]
         });
     });
     
-    function DrawRealGraph(str_values) {
-        var realData = [];
+    function DrawGraph(str_values, propertyFunc) {
+        var data = [];
 
-        $.each(str_values, function (idx, val) { if (val.ValueReal != null) {
-                                                     realData.push([ parseJsonDate(val.TimeStamp), parseFloat(val.ValueReal) ]);
+        $.each(str_values, function (idx, val) { if (propertyFunc(val) != null) {
+                                                     data.push([ parseJsonDate(val.TimeStamp), parseFloat(propertyFunc(val)) ]);
                                                  } });
 
-        realData = realData.sort(function(a, b) { return a[0] > b[0] ? 1 : -1; });
-
-        return realData;
-    };
-    
-    function DrawForecastGraph(str_values) {
-        var realData = [];
-
-        $.each(str_values, function (idx, val) {
-            if (val.ValuePredicted != null) {
-                realData.push([parseJsonDate(val.TimeStamp), parseFloat(val.ValuePredicted)]);
-            }
-        });
-
-        realData = realData.sort(function (a, b) { return a[0] > b[0] ? 1 : -1; });
+        data = data.sort(function(a, b) { return a[0] > b[0] ? 1 : -1; });
 
         return realData;
     };
