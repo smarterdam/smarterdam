@@ -18,16 +18,17 @@ namespace Smarterdam.Filters
         private ForecastSettings settings;
         private MultipleNeuralNetworksModel model;
         private bool trainingFinished;
+        private DataExchange exchange;
 
         private DateTime waitUntil;
 
         private int globalCounter;
         private const int NN_NUMBER = 4;
 
-        public onNeuralPredictionFilter(FilterParameters parameters, DateTime trainTill)
+        public onNeuralPredictionFilter(FilterParameters parameters, DateTime trainTill, DataExchange exchange = null)
         {
+            this.exchange = exchange;
             this.waitUntil = trainTill;
-            //this.iterations = testSize;
             this.timeSeries = new TimeSeries(0);
 
             settings = new ForecastSettings();
@@ -52,6 +53,13 @@ namespace Smarterdam.Filters
             var dateTimeStr = newValue.Values["TimeStamp"].ToString();
             DateTime dateTime;
             DateTime.TryParse(dateTimeStr, out dateTime);
+
+            //нужно, чтобы симулировать приход значений раз в 15 минут
+            //то есть чтобы онлайн ждал, пока оффлайн дотренирует НС до текущей даты
+            while(exchange["TrainingInProcess"] as bool? == true && dateTime >= (exchange["LastDate"] as DateTime?))
+            {
+                Thread.Sleep(100);
+            }
             
             if (dateTime > waitUntil && !trainingFinished)
             {

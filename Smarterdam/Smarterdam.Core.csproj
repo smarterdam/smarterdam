@@ -84,6 +84,7 @@
     <Compile Include="Entities\Forecast.cs" />
     <Compile Include="Entities\ForecastResult.cs" />
     <Compile Include="Entities\IPipelineResult.cs" />
+    <Compile Include="Filters\DataExchange.cs" />
     <Compile Include="Filters\ResultOutputFilter.cs" />
     <Compile Include="Filters\offPredictionFittingFilter.cs" />
     <Compile Include="Filters\onErrorCalculationFilter.cs" />

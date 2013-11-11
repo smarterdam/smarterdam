@@ -15,6 +15,7 @@ namespace Smarterdam.Filters
 
         private List<TimeSeries> storeTimeSeries;
         private int counter = 0;
+        private DataExchange exchange;
 
         private int PACKAGE_SIZE = 96;
         private DateTime waitUntil;
@@ -25,8 +26,9 @@ namespace Smarterdam.Filters
 
         private List<TimeSeries> timeSeriesEnsemble = new List<TimeSeries>();
 
-        public offPredictionFittingFilter(FilterParameters parameters, DateTime trainTill, Dictionary<string, int> time)
+        public offPredictionFittingFilter(FilterParameters parameters, DateTime trainTill, Dictionary<string, int> time, DataExchange exchange = null)
         {
+            this.exchange = exchange;
             this.time = time;
             this.waitUntil = trainTill;
             this.parameters = parameters;
@@ -68,10 +70,13 @@ namespace Smarterdam.Filters
 
             if (counter == PACKAGE_SIZE)
             {
+                exchange["TrainingInProcess"] = true;
+                exchange["LastDate"] = dateTime;
                 var model = parameters["model"] as MultipleNeuralNetworksModel;
                 model.Train(timeSeriesEnsemble, settings, true);
                 counter = 0;
                 this.time[globalCounter + "Training"] = 1;
+                exchange["TrainingInProcess"] = false;
             }
             else
             {
