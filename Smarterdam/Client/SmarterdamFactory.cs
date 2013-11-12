@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Ninject;
 using Smarterdam.Api;
-using Smarterdam.DataAccess;
 using Smarterdam.DataSource;
 using Smarterdam.Helpers;
 using Smarterdam.PipelineModels;

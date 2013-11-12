@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MongoRepository;
-using Smarterdam.DataAccess;
 using Smarterdam.Entities;
 using Smarterdam.Filters;
 using Smarterdam.Pipelines;

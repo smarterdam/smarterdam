@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using MongoRepository;
 using Smarterdam.Api;
-using Smarterdam.DataAccess;
 using Smarterdam.Entities;
 using Smarterdam.Log;
 using Smarterdam.Pipelines;
