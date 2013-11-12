@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoRepository;
 
 namespace Smarterdam.Entities
 {
-    public class ForecastResult : IPipelineResult
+    public class ForecastResult : Entity
     {
-        public int MeasurementID { get; set; }
-
         public DateTime TimeStamp { get; set; }
         public double? RealValue { get; set; }
         public double? PredictedValue { get; set; }

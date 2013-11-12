@@ -38,6 +38,9 @@
     <Reference Include="MongoDB.Driver">
       <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
+    <Reference Include="MongoRepository">
+      <HintPath>..\packages\MongoRepository.1.6.1\lib\MongoRepository.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -75,15 +78,9 @@
     <Compile Include="Client\TestStartDateProvider.cs" />
     <Compile Include="Client\ModelsStarter.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="DataAccess\DbEntities\DbForecast.cs" />
-    <Compile Include="DataAccess\DbEntities\DbForecastResult.cs" />
-    <Compile Include="DataAccess\FileForecastResultRepository.cs" />
-    <Compile Include="DataAccess\IForecastResultRepository.cs" />
-    <Compile Include="DataAccess\IResultRepository.cs" />
-    <Compile Include="DataAccess\MongoDbForecastResultRepository.cs" />
     <Compile Include="Entities\Forecast.cs" />
     <Compile Include="Entities\ForecastResult.cs" />
-    <Compile Include="Entities\IPipelineResult.cs" />
+    <Compile Include="Entities\Measurement.cs" />
     <Compile Include="Filters\DataExchange.cs" />
     <Compile Include="Filters\ResultOutputFilter.cs" />
     <Compile Include="Filters\offPredictionFittingFilter.cs" />
@@ -128,8 +125,11 @@
     <Compile Include="Server\SmarterdamServer.cs" />
     <Compile Include="Server\StreamServer.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="DataAccess\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MongoRepository;
 using Newtonsoft.Json;
 using Smarterdam.Client;
-using Smarterdam.DataAccess;
 using Smarterdam.DataSource;
 using Smarterdam.Entities;
 using Smarterdam.Log;
@@ -19,12 +19,10 @@ namespace Smarterdam.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IForecastResultRepository repository = null;
+        private IRepository<Measurement> repository = new MongoRepository<Measurement>("mongodb://localhost/smarterdam", "measurements");
 
         public HomeController()
         {
-            //repository = new FileForecastResultRepository();
-            repository = new MongoDbForecastResultRepository();
         }
         //
         // GET: /Home/
@@ -39,7 +37,7 @@ namespace Smarterdam.Web.Controllers
             model = new IndexViewModel();
             model.Measurements = lines.Select(x => new SelectListItem() { Text = x, Value = x });
 
-            model.CurrentTasks = repository.GetTasks().Select(x => x.ToString()).ToList();
+            model.CurrentTasks = repository.Select(x => x.MeasurementId).ToList();
             return View(model);
         }
 
@@ -82,7 +80,7 @@ namespace Smarterdam.Web.Controllers
 
             try
             {
-                var tasks = repository.GetTasks();
+                var tasks = repository.ToList();
 
                 Logging.Debug("Tasks length:{0}", tasks.Count());
 
@@ -91,7 +89,7 @@ namespace Smarterdam.Web.Controllers
                 foreach (var task in tasks)
                 {
                     Logging.Debug("Start task {0}", task);
-                    var forecast = repository.Get(task);
+                    var forecast = task.Forecasts.FirstOrDefault();
                     Logging.Debug("Forecast result error: {0}", forecast.Error);
                     if (forecast.Error.HasValue && !double.IsNaN(forecast.Error.Value))
                     {
@@ -162,7 +160,7 @@ namespace Smarterdam.Web.Controllers
 
             try
             {
-                var forecast = repository.Get(Int32.Parse(id));
+                var forecast = repository.FirstOrDefault(x => x.MeasurementId == id).Forecasts[0];
                 var results = forecast.Results;
                 var values = new List<dynamic>();
 

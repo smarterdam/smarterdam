@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoRepository;
 using Smarterdam.DataAccess;
+using Smarterdam.Entities;
 using Smarterdam.Filters;
 using Smarterdam.Pipelines;
 
@@ -11,7 +13,7 @@ namespace Smarterdam.Client
     public class IntelligenceManager : IIntelligenceManager
     {
         private FilterParameters parameters;
-        private readonly IForecastResultRepository resultsRepository;
+        private readonly MongoRepository<Measurement> repository = new MongoRepository<Measurement>("mongodb://localhost/smarterdam", "measurements");
         private readonly ITestStartDateProvider testStartDateProvider;
 
         public class Entity
@@ -25,9 +27,8 @@ namespace Smarterdam.Client
             public string Validity { get; set; }
         }
 
-        public IntelligenceManager(IForecastResultRepository repository, ITestStartDateProvider testStartDateProvider)
+        public IntelligenceManager(ITestStartDateProvider testStartDateProvider)
         {
-            this.resultsRepository = repository;
             this.testStartDateProvider = testStartDateProvider;
         }
 
@@ -63,7 +64,7 @@ namespace Smarterdam.Client
             onlinePipeline.Register(new onNeuralPredictionFilter(parameters, trainUntil, exchange));
             onlinePipeline.Register(new onErrorCalculationFilter(parameters));
             
-            onlinePipeline.Register(new ResultOutputFilter(resultsRepository) { MeasurementId = Int32.Parse(id)});
+            onlinePipeline.Register(new ResultOutputFilter(repository) { MeasurementId = id});
 
             return onlinePipeline;
         }

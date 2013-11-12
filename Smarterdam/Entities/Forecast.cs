@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoRepository;
 
 namespace Smarterdam.Entities
 {
-    public class Forecast
+    public class Forecast : Entity
     {
-        public int MeasurementId { get; set; }
+		public string ForecastModelId { get; set; }
         public double? Error { get; set; }
 
-        public IEnumerable<ForecastResult> Results { get; set; }
+        public List<ForecastResult> Results { get; set; }
 
         public Forecast()
         {

@@ -5,7 +5,6 @@ using System.Text;
 using NUnit.Framework;
 using Ninject;
 using Smarterdam.Client;
-using Smarterdam.DataAccess;
 using Smarterdam.Tests.Mocks;
 
 namespace Smarterdam.Tests
@@ -21,7 +20,6 @@ namespace Smarterdam.Tests
             SmarterdamFactory.Init(kernel =>
                 {
                     kernel.Rebind<IMessageQueue>().To<MockMessageQueue>();
-                    kernel.Rebind<IForecastResultRepository>().To<MockResultsRepository>();
                     kernel.Rebind<ITestStartDateProvider>().To<MockTestStartDateProvider>();
                 });
 

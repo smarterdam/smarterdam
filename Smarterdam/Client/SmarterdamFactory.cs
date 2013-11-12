@@ -31,7 +31,6 @@ namespace Smarterdam.Client
             kernel.Bind<IDataGenerator>().To<RabbitMQDataGenerator>();
             kernel.Bind<IQueryParser>().To<QueryParser>();
             kernel.Bind<IModelsStarter>().To<ModelsStarter>();
-            kernel.Bind<IForecastResultRepository>().To<MongoDbForecastResultRepository>();
             kernel.Bind<ITestStartDateProvider>().To<TestStartDateProvider>();
 
 	        kernel.Bind<IPipelineModel>().To<NeuralNetworkPipelineModel>();
