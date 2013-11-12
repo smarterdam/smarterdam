@@ -8,7 +8,7 @@ namespace Smarterdam.Tests.Mocks
 {
     public class MockTestStartDateProvider : ITestStartDateProvider
     {
-        public DateTime GetTimestampOfTestStart(int measurementId)
+        public DateTime GetTimestampOfTestStart(string measurementId)
         {
             return DateTime.Now.AddSeconds(5);
         }

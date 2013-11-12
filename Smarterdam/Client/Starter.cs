@@ -10,13 +10,13 @@ namespace Smarterdam.Client
     public class Starter : ISmarterdamClient
     {
         private IQueryParser queryParser;
-        private IThreadsStarter _threadsStarter;
+        private IModelsStarter _modelsStarter;
 
         [Inject]
-        public Starter(IQueryParser queryParser, IThreadsStarter _threadsStarter)
+		public Starter(IQueryParser queryParser, IModelsStarter _modelsStarter)
         {
             this.queryParser = queryParser;
-            this._threadsStarter = _threadsStarter;
+			this._modelsStarter = _modelsStarter;
         }
 
         public void Start(string query, string measurementId)
@@ -30,7 +30,7 @@ namespace Smarterdam.Client
 
             //if (command.ListCommand[3].GetMethodName() == "SAVE")
             //{
-            _threadsStarter.StartThreads(command, measurementId);
+            _modelsStarter.StartModels(measurementId);
             //}
 
             //if (command.ListCommand[3].GetMethodName() == "KILL")

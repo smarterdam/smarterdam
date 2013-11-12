@@ -64,7 +64,7 @@
     <Compile Include="Client\IQueryParser.cs" />
     <Compile Include="Client\ISmarterdamClient.cs" />
     <Compile Include="Client\ITestStartDateProvider.cs" />
-    <Compile Include="Client\IThreadsStarter.cs" />
+    <Compile Include="Client\IModelsStarter.cs" />
     <Compile Include="Client\PipelinePack.cs" />
     <Compile Include="Client\QueryParser.cs" />
     <Compile Include="Client\RabbitMQAdapter.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Client\SmarterdamFactory.cs" />
     <Compile Include="Client\Starter.cs" />
     <Compile Include="Client\TestStartDateProvider.cs" />
-    <Compile Include="Client\ThreadsStarter.cs" />
+    <Compile Include="Client\ModelsStarter.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="DataAccess\DbEntities\DbForecast.cs" />
     <Compile Include="DataAccess\DbEntities\DbForecastResult.cs" />
@@ -111,6 +111,8 @@
     <Compile Include="Models\NeuralNetwork\StructuredDataSet.cs" />
     <Compile Include="Models\NeuralNetwork\Synapse.cs" />
     <Compile Include="Models\NeuralNetwork\TimeSeries.cs" />
+    <Compile Include="PipelineModels\IPipelineModel.cs" />
+    <Compile Include="PipelineModels\NeuralNetworkPipelineModel.cs" />
     <Compile Include="Pipelines\BaseFilter.cs" />
     <Compile Include="Pipelines\FilterParameters.cs" />
     <Compile Include="Pipelines\IFilter.cs" />

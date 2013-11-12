@@ -7,6 +7,7 @@ using Smarterdam.Api;
 using Smarterdam.DataAccess;
 using Smarterdam.DataSource;
 using Smarterdam.Helpers;
+using Smarterdam.PipelineModels;
 using Smarterdam.Server;
 
 namespace Smarterdam.Client
@@ -29,9 +30,11 @@ namespace Smarterdam.Client
             kernel.Bind<IDataSource>().To<EcoScadaDataSource>();
             kernel.Bind<IDataGenerator>().To<RabbitMQDataGenerator>();
             kernel.Bind<IQueryParser>().To<QueryParser>();
-            kernel.Bind<IThreadsStarter>().To<ThreadsStarter>();
+            kernel.Bind<IModelsStarter>().To<ModelsStarter>();
             kernel.Bind<IForecastResultRepository>().To<MongoDbForecastResultRepository>();
             kernel.Bind<ITestStartDateProvider>().To<TestStartDateProvider>();
+
+	        kernel.Bind<IPipelineModel>().To<NeuralNetworkPipelineModel>();
 
             kernel.Bind<IMessageQueue>().To<SimpleMessageQueue>();
 

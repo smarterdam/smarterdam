@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Smarterdam.Client
 {
-    public interface IThreadsStarter
+    public interface IModelsStarter
     {
-        void StartThreads(Commands command, string measurementId);
+        void StartModels(string measurementId);
     }
 }
