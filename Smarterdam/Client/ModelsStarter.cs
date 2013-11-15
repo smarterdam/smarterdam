@@ -21,14 +21,15 @@ namespace Smarterdam.Client
     {
 	    private readonly IEnumerable<IPipelineModel> models;
         private readonly IMessageQueue messageQueue;
-        private readonly IRepository<Measurement> measurementRepository;
+        //private readonly IRepository<Measurement> measurementRepository;
+        private readonly MongoRepository<Measurement> measurementRepository = new MongoRepository<Measurement>("mongodb://localhost/smarterdam", "measurements");
 
         [Inject]
-        public ModelsStarter(IEnumerable<IPipelineModel> models, IMessageQueue messageQueue, IRepository<Measurement> measurementRepository)
+        public ModelsStarter(IEnumerable<IPipelineModel> models, IMessageQueue messageQueue)
         {
             this.messageQueue = messageQueue;
 	        this.models = models;
-            this.measurementRepository = measurementRepository;
+            //this.measurementRepository = measurementRepository;
         }
 
         public void StartModels(string measurementId)
