@@ -7,8 +7,11 @@ namespace Smarterdam.Web.ViewModels
 {
     public class StatusViewModel
     {
-        public string ChartData { get; set; }
-
-        public double? Error { get; set; }
+        public List<ChartViewModel> Charts { get; set; } 
+   
+        public StatusViewModel()
+        {
+            Charts = new List<ChartViewModel>();
+        }
     }
 }

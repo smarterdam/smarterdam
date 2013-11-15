@@ -7,6 +7,6 @@ namespace Smarterdam.Client
 {
     public interface IIntelligenceManager
     {
-        PipelinePack ComposePipeline(string id);
+        PipelinePack ComposePipeline(string id, string name="");
     }
 }

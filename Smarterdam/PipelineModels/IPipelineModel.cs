@@ -10,6 +10,7 @@ namespace Smarterdam.PipelineModels
 {
 	public interface IPipelineModel
 	{
+        string Name { get; }
 		void Start(string id, IMessageQueue messageQueue);
 	}
 }

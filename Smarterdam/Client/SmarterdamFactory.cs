@@ -33,6 +33,7 @@ namespace Smarterdam.Client
             kernel.Bind<ITestStartDateProvider>().To<TestStartDateProvider>();
 
 	        kernel.Bind<IPipelineModel>().To<NeuralNetworkPipelineModel>();
+            kernel.Bind<IPipelineModel>().To<NeuralNetworkPipelineModel>();
 
             kernel.Bind<IMessageQueue>().To<SimpleMessageQueue>();
 

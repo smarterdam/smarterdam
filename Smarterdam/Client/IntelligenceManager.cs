@@ -31,14 +31,14 @@ namespace Smarterdam.Client
             this.testStartDateProvider = testStartDateProvider;
         }
 
-        public virtual PipelinePack ComposePipeline(string id)
+        public virtual PipelinePack ComposePipeline(string id, string name)
         {
             List<List<float>> DbRealValue = new List<List<float>>();
             List<DateTime> DbDateTime = new List<DateTime>();
 
             var exchange = new DataExchange();
 
-            var onlinePipeline = ComposeOnPipeline(id, exchange);
+            var onlinePipeline = ComposeOnPipeline(id, exchange, name);
 
             var offlinePipeline = ComposeOffPipeline(id, exchange);
 
@@ -52,7 +52,7 @@ namespace Smarterdam.Client
             return sourcePipeline;
         }
 
-        protected virtual StreamPipeline ComposeOnPipeline(string id, DataExchange exchange)
+        protected virtual StreamPipeline ComposeOnPipeline(string id, DataExchange exchange, string name)
         {
             var onlinePipeline = new StreamPipeline();
 
@@ -63,7 +63,7 @@ namespace Smarterdam.Client
             onlinePipeline.Register(new onNeuralPredictionFilter(parameters, trainUntil, exchange));
             onlinePipeline.Register(new onErrorCalculationFilter(parameters));
             
-            onlinePipeline.Register(new ResultOutputFilter(repository) { MeasurementId = id});
+            onlinePipeline.Register(new ResultOutputFilter(repository) { MeasurementId = id, ForecastModelId = name});
 
             return onlinePipeline;
         }

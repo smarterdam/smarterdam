@@ -75,7 +75,7 @@ namespace Smarterdam.Web.Controllers
         public ActionResult BatchResults(int cat = 50)
         {
             Logging.Debug("Entered BatchResults");
-            var model = new StatusViewModel();
+            var model = new ChartViewModel();
             model.ChartData = "";
 
             try
@@ -152,30 +152,43 @@ namespace Smarterdam.Web.Controllers
                       .Select(a => a.Split(';')[0]);
         }
 
+        private ChartViewModel GetChart(Forecast forecast, string id)
+        {
+            var model = new ChartViewModel();
+            model.Name = id;
+
+            var results = forecast.Results;
+            var values = new List<dynamic>();
+
+            foreach (var result in results.OrderBy(x => x.TimeStamp))
+            {
+                dynamic value = new ExpandoObject();
+                value.TimeStamp = result.TimeStamp.ToString("MM.dd.yy HH:mm:ss");
+                value.ValueReal = result.RealValue.ToString().Replace(',', '.');
+                value.ValuePredicted = result.PredictedValue.HasValue ? result.PredictedValue.ToString().Replace(',', '.') : null;
+
+                values.Add(value);
+            }
+
+            model.ChartData = JsonConvert.SerializeObject(values);
+            model.Error = forecast.Error;
+
+            return model;
+        }
+
         [Authorize]
         public ActionResult Status(string id)
         {
             var model = new StatusViewModel();
-            model.ChartData = "";
-
+            
             try
             {
-                var forecast = repository.FirstOrDefault(x => x.MeasurementId == id).Forecasts[0];
-                var results = forecast.Results;
-                var values = new List<dynamic>();
-
-                foreach (var result in results.OrderBy(x => x.TimeStamp))
+                var forecasts = repository.FirstOrDefault(x => x.MeasurementId == id).Forecasts;
+                int i = 0;
+                foreach (var forecast in forecasts)
                 {
-                    dynamic value = new ExpandoObject();
-                    value.TimeStamp = result.TimeStamp.ToString("MM.dd.yy HH:mm:ss");
-                    value.ValueReal = result.RealValue.ToString().Replace(',', '.');
-                    value.ValuePredicted = result.PredictedValue.HasValue ? result.PredictedValue.ToString().Replace(',', '.') : null;
-
-                    values.Add(value);
+                    model.Charts.Add(GetChart(forecast, (i++).ToString()));
                 }
-
-                model.ChartData = JsonConvert.SerializeObject(values);
-                model.Error = forecast.Error;
 
                 return View(model);
             }

@@ -35,8 +35,11 @@ namespace Smarterdam.Filters
                 {
                     _forecast = new Forecast() { ForecastModelId = this.ForecastModelId };
                     _measurement = repository.FirstOrDefault(x => x.MeasurementId == this.MeasurementId);
-                    if (_measurement == null) _measurement = new Measurement {MeasurementId = this.MeasurementId};
-                    _measurement.Forecasts = new List<Forecast>();
+                    if (_measurement == null)
+                    {
+                        _measurement = new Measurement {MeasurementId = this.MeasurementId};
+                    }
+
                     _measurement.Forecasts.Add(_forecast);
                     _initialized = true;
                 }
