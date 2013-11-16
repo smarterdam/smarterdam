@@ -64,6 +64,23 @@
                 }
             });
         }
+        
+        function ShowTrustIndexGraph(id) {
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + "/Home/ForecastUsingTrustIndex",
+                data: { id: id },
+                beforeSend: function () {
+                    $("#loading").show();
+                },
+                complete: function () {
+                    $("#loading").hide();
+                },
+                success: function (response) {
+                    $("#chartPlaceholder").html(response);
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -82,6 +99,7 @@
             {
                 <div>
                     <a class="showGraph btn-link" onclick="ShowGraph(@item)" href="#">@item</a>
+                    <a class "showTrustIndexGraph btn-link" onclick="ShowTrustIndexGraph(@item)" href="#">[TI]</a>
                 </div>
             }
         </div>

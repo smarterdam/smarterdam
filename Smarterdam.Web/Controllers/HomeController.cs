@@ -20,7 +20,7 @@ namespace Smarterdam.Web.Controllers
     public class HomeController : Controller
     {
         private IRepository<Measurement> repository = new MongoRepository<Measurement>("mongodb://localhost/smarterdam", "measurements");
-
+        
         public HomeController()
         {
         }
@@ -158,9 +158,20 @@ namespace Smarterdam.Web.Controllers
             model.Name = id;
 
             var results = forecast.Results;
+            var values = GetValuesForChart(results);
+
+            model.ChartData = JsonConvert.SerializeObject(values);
+            var lastDate = forecast.Results.LastOrDefault().TimeStamp;
+            model.Error = CalculateMAPE(forecast.Results.SkipWhile(x => x.TimeStamp <= lastDate.AddDays(-3)));
+
+            return model;
+        }
+
+        private List<dynamic> GetValuesForChart(IEnumerable<ForecastResult> forecastResults)
+        {
             var values = new List<dynamic>();
 
-            foreach (var result in results.OrderBy(x => x.TimeStamp))
+            foreach (var result in forecastResults.OrderBy(x => x.TimeStamp))
             {
                 dynamic value = new ExpandoObject();
                 value.TimeStamp = result.TimeStamp.ToString("MM.dd.yy HH:mm:ss");
@@ -169,11 +180,99 @@ namespace Smarterdam.Web.Controllers
 
                 values.Add(value);
             }
+            
+            return values;
+        }
 
-            model.ChartData = JsonConvert.SerializeObject(values);
-            model.Error = forecast.Error;
+        [Authorize]
+        public ActionResult ForecastUsingTrustIndex(string id)
+        {
+            var statusModel = new StatusViewModel();
+            var model = new ChartViewModel();
 
-            return model;
+            try
+            {
+                var forecasts = repository.FirstOrDefault(x => x.MeasurementId == id).Forecasts;
+                var startForecastingDate =
+                    forecasts.Select(x => x.Results.FirstOrDefault(r => r.PredictedValue != null).TimeStamp).Max();
+                    //дата, начиная с которой будем использовать метод trust index
+
+                var lastDate = forecasts[0].Results.LastOrDefault().TimeStamp;
+                var startTestDate = lastDate.AddDays(-3);
+                startForecastingDate = startForecastingDate.AddHours(12).Date; //округляем до ближайшего дня
+
+                var values = new List<ForecastResult>();
+                values.AddRange(forecasts[0].Results.TakeWhile(x => x.TimeStamp < startForecastingDate).Select(x =>
+                    {
+                        x.PredictedValue = null;
+                        return x;
+                    }));
+
+                var forecastResults = forecasts.Select(x => x.Results.SkipWhile(y => y.TimeStamp < startForecastingDate).ToList()).ToList();
+
+                var trustIndexDict = new Dictionary<int, int>();
+                for (int i = 0; i < forecastResults.Count(); i++)
+                {
+                    trustIndexDict.Add(i, 0);
+                }
+
+                var currentDay = startForecastingDate.AddDays(1);
+
+                var errorSum = 0.0;
+                var counter = 0;
+
+                while (currentDay.Date < lastDate)
+                {
+                    var innerCurrentDay = currentDay;
+                    var nextDay = forecastResults.Select(x => x.TakeWhile(r => r.TimeStamp < innerCurrentDay).ToList()).ToList();
+                    forecastResults = forecastResults.Select(x => x.SkipWhile(r => r.TimeStamp < innerCurrentDay).ToList()).ToList();
+                    var errors = nextDay.Select(x => CalculateMAPE(x)).ToList();
+                    var minError = errors.Min();
+                    var winningModelIndex = errors.FindIndex(x => x == minError);
+                    trustIndexDict[winningModelIndex]++;
+
+                    var mostTrustedModelIndex = trustIndexDict.FirstOrDefault(x => x.Value == trustIndexDict.Max(y => y.Value)).Key;
+
+                    values.AddRange(nextDay[mostTrustedModelIndex]);
+
+                    if (currentDay >= startTestDate)
+                    {
+                        counter++;
+                        errorSum += minError;
+                    }
+
+                    currentDay = currentDay.AddDays(1);
+                }
+
+                model.ChartData = JsonConvert.SerializeObject(GetValuesForChart(values));
+                model.Error = CalculateMAPE(values.SkipWhile(x => x.TimeStamp <= startTestDate));
+
+                statusModel.Charts.Add(model);
+
+                return View("Status", statusModel);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        private double CalculateMAPE(IEnumerable<ForecastResult> source)
+        {
+            var sum = 0.0;
+            var counter = 0;
+
+            foreach (var forecastResult in source)
+            {
+                if (forecastResult.RealValue > 0 && forecastResult.PredictedValue.HasValue)
+                {
+                    counter++;
+                    sum += Math.Abs(forecastResult.RealValue.Value - forecastResult.PredictedValue.Value)/forecastResult.RealValue.Value;
+                }
+            }
+
+            return sum/counter;
         }
 
         [Authorize]

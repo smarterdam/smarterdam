@@ -38,19 +38,27 @@ namespace Smarterdam.Filters
 
             Enqueue(newValue);
 
-            var pred = Dequeue() ?? newValue;
+            var pred = Dequeue();
             var actualValue = double.Parse(newValue.Values["Value"].ToString());
-            var predictedValue = double.Parse(pred.Values["Value"].ToString());
-            
-            newValue.Values["PredictedValue"] = predictedValue;
-
-            if (actualValue > 0)
+            if (pred != null)
             {
-                counter++;
-                sum += Math.Abs((actualValue - predictedValue)/actualValue);
-            }
+                var predictedValue = double.Parse(pred.Values["Value"].ToString());
 
-            newValue.Values["MAPE"] = sum/counter;
+                newValue.Values["PredictedValue"] = predictedValue;
+
+                if (actualValue > 0)
+                {
+                    counter++;
+                    sum += Math.Abs((actualValue - predictedValue)/actualValue);
+                }
+
+                newValue.Values["MAPE"] = sum/counter;
+            }
+            else
+            {
+                newValue.Values["PredictedValue"] = null;
+                newValue.Values["MAPE"] = null;
+            }
 
             return new DataStreamUnit[] { newValue };
             
