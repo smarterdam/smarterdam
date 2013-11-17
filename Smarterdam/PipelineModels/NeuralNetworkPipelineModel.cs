@@ -23,7 +23,7 @@ namespace Smarterdam.PipelineModels
 		public NeuralNetworkPipelineModel(IIntelligenceManager intelligenceManager)
 		{
 			this.intelligenceManager = intelligenceManager;
-            this.name = this.GetType().ToString() + random.Next();
+            this.name = this.GetType().ToString();
 		}
 
 		public void Start(string id, IMessageQueue queue)

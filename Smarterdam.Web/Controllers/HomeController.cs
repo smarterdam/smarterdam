@@ -152,10 +152,10 @@ namespace Smarterdam.Web.Controllers
                       .Select(a => a.Split(';')[0]);
         }
 
-        private ChartViewModel GetChart(Forecast forecast, string id)
+        private ChartViewModel GetChart(Forecast forecast)
         {
             var model = new ChartViewModel();
-            model.Name = id;
+            model.ChartName = forecast.ForecastModelId;
 
             var results = forecast.Results;
             var values = GetValuesForChart(results);
@@ -184,11 +184,10 @@ namespace Smarterdam.Web.Controllers
             return values;
         }
 
-        [Authorize]
-        public ActionResult ForecastUsingTrustIndex(string id)
+        private ChartViewModel GetTrustIndexChart(string id)
         {
-            var statusModel = new StatusViewModel();
             var model = new ChartViewModel();
+            model.ChartName = "Trust Index model";
 
             try
             {
@@ -247,9 +246,7 @@ namespace Smarterdam.Web.Controllers
                 model.ChartData = JsonConvert.SerializeObject(GetValuesForChart(values));
                 model.Error = CalculateMAPE(values.SkipWhile(x => x.TimeStamp <= startTestDate));
 
-                statusModel.Charts.Add(model);
-
-                return View("Status", statusModel);
+                return model;
             }
             catch (Exception)
             {
@@ -283,10 +280,17 @@ namespace Smarterdam.Web.Controllers
             try
             {
                 var forecasts = repository.FirstOrDefault(x => x.MeasurementId == id).Forecasts;
-                int i = 0;
                 foreach (var forecast in forecasts)
                 {
-                    model.Charts.Add(GetChart(forecast, (i++).ToString()));
+                    model.Charts.Add(GetChart(forecast));
+                }
+
+                model.Charts.Add(GetTrustIndexChart(id));
+
+                int i = 0;
+                foreach (var chart in model.Charts)
+                {
+                    chart.Id = (i++).ToString();
                 }
 
                 return View(model);
