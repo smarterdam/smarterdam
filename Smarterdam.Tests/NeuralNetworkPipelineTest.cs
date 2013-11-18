@@ -23,8 +23,8 @@ namespace Smarterdam.Tests
                     kernel.Rebind<ITestStartDateProvider>().To<MockTestStartDateProvider>();
                 });
 
-            var client = SmarterdamFactory.CreateClient();
-            client.Start("", "1");
+            //var client = SmarterdamFactory.CreateClient();
+            //client.Start("", "1");
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using MongoRepository;
 using Newtonsoft.Json;
+using Ninject;
 using Smarterdam.Client;
 using Smarterdam.DataSource;
 using Smarterdam.Entities;
@@ -19,10 +20,15 @@ namespace Smarterdam.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ISmarterdamClient client;
+        private readonly ISmarterdamServer server;
         private IRepository<Measurement> repository = new MongoRepository<Measurement>("mongodb://localhost/smarterdam", "measurements");
         
-        public HomeController()
+        [Inject]
+        public HomeController(ISmarterdamClient client, ISmarterdamServer server)
         {
+            this.client = client;
+            this.server = server;
         }
         //
         // GET: /Home/
@@ -52,18 +58,14 @@ namespace Smarterdam.Web.Controllers
             
             Logging.Info("manager created");
 
-            var server = SmarterdamFactory.CreateServer();
             server.Start(_id);
 
-            var client = SmarterdamFactory.CreateClient();
-            
             client.Start(query, id);
         }
 
         [Authorize]
         public void BatchGo(int quantity = 0)
         {
-            //var buildings = quantity > 0 ? GetBuildingIdList().Take(quantity) : GetBuildingIdList();
             var buildings = GetBuildingIdList();
             foreach (var buildingId in buildings)
             {
@@ -162,7 +164,7 @@ namespace Smarterdam.Web.Controllers
 
             model.ChartData = JsonConvert.SerializeObject(values);
             var lastDate = forecast.Results.LastOrDefault().TimeStamp;
-            model.Error = CalculateMAPE(forecast.Results.SkipWhile(x => x.TimeStamp <= lastDate.AddDays(-3)));
+            model.Error = CalculateMAPE(forecast.Results.SkipWhile(x => x.TimeStamp <= lastDate.AddDays(-7)));
 
             return model;
         }
@@ -174,7 +176,7 @@ namespace Smarterdam.Web.Controllers
             foreach (var result in forecastResults.OrderBy(x => x.TimeStamp))
             {
                 dynamic value = new ExpandoObject();
-                value.TimeStamp = result.TimeStamp.ToString("MM.dd.yy HH:mm:ss");
+				value.TimeStamp = result.TimeStamp.ToString("yyyy-MM-ddTHH:mm:ss");
                 value.ValueReal = result.RealValue.ToString().Replace(',', '.');
                 value.ValuePredicted = result.PredictedValue.HasValue ? result.PredictedValue.ToString().Replace(',', '.') : null;
 
@@ -197,7 +199,7 @@ namespace Smarterdam.Web.Controllers
                     //дата, начиная с которой будем использовать метод trust index
 
                 var lastDate = forecasts[0].Results.LastOrDefault().TimeStamp;
-                var startTestDate = lastDate.AddDays(-3);
+                var startTestDate = lastDate.AddDays(-7);
                 startForecastingDate = startForecastingDate.AddHours(12).Date; //округляем до ближайшего дня
 
                 var values = new List<ForecastResult>();
@@ -279,11 +281,11 @@ namespace Smarterdam.Web.Controllers
             
             try
             {
-                var forecasts = repository.FirstOrDefault(x => x.MeasurementId == id).Forecasts;
-                foreach (var forecast in forecasts)
-                {
-                    model.Charts.Add(GetChart(forecast));
-                }
+				var forecasts = repository.FirstOrDefault(x => x.MeasurementId == id).Forecasts;
+				foreach (var forecast in forecasts)
+				{
+					model.Charts.Add(GetChart(forecast));
+				}
 
                 model.Charts.Add(GetTrustIndexChart(id));
 

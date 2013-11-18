@@ -10,11 +10,14 @@ namespace Smarterdam.UI
 {
     public class Program
     {
-        private static readonly ISmarterdamClient starter;
+        private static ISmarterdamClient starter;
+
+        [Inject]
+        public static ISmarterdamClient Starter { set { starter = value; } }
 
         static Program()
         {
-            starter = SmarterdamFactory.CreateClient();    
+              
         }
 
         //[STAThread]

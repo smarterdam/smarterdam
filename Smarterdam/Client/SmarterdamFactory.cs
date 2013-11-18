@@ -16,6 +16,15 @@ namespace Smarterdam.Client
         private static IKernel kernel;
         private static bool _initialized;
 
+        public static IKernel Kernel 
+        { 
+            get
+            {
+                CheckInit();
+                return kernel;
+            } 
+        }
+
         static SmarterdamFactory()
         {
             
@@ -51,17 +60,17 @@ namespace Smarterdam.Client
             _initialized = true;
         }
 
-        public static ISmarterdamClient CreateClient()
-        {
-            CheckInit();
-            return kernel.Get<ISmarterdamClient>();
-        }
+        //public static ISmarterdamClient CreateClient()
+        //{
+        //    CheckInit();
+        //    return kernel.Get<ISmarterdamClient>();
+        //}
 
-        public static ISmarterdamServer CreateServer()
-        {
-            CheckInit();
-            return kernel.Get<ISmarterdamServer>();
-        }
+        //public static ISmarterdamServer CreateServer()
+        //{
+        //    CheckInit();
+        //    return kernel.Get<ISmarterdamServer>();
+        //}
 
         private static void CheckInit()
         {
