@@ -8,6 +8,7 @@ using Smarterdam.DataSource;
 using Smarterdam.Helpers;
 using Smarterdam.PipelineModels;
 using Smarterdam.Server;
+using Smarterdam.DataAccess;
 
 namespace Smarterdam.Client
 {
@@ -45,6 +46,10 @@ namespace Smarterdam.Client
             kernel.Bind<IPipelineModel>().To<NeuralNetworkPipelineModel>();
 
             kernel.Bind<IMessageQueue>().To<SimpleMessageQueue>();
+
+            kernel.Bind(typeof (IRepository<>))
+                  .To(typeof (MongoRepositoryAdapter<>))
+                  .WithConstructorArgument("collectionName", "measurements");
 
             kernel.Bind<ISmarterdamClient>().To<Starter>();
 

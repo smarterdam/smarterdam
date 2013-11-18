@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MongoRepository;
 using Newtonsoft.Json;
 using Ninject;
 using Smarterdam.Client;
@@ -15,6 +14,7 @@ using Smarterdam.Log;
 using Smarterdam.Server;
 using Smarterdam.UI;
 using Smarterdam.Web.ViewModels;
+using Smarterdam.DataAccess;
 
 namespace Smarterdam.Web.Controllers
 {
@@ -22,13 +22,14 @@ namespace Smarterdam.Web.Controllers
     {
         private readonly ISmarterdamClient client;
         private readonly ISmarterdamServer server;
-        private IRepository<Measurement> repository = new MongoRepository<Measurement>("mongodb://localhost/smarterdam", "measurements");
+        private readonly IRepository<Measurement> repository;
         
         [Inject]
-        public HomeController(ISmarterdamClient client, ISmarterdamServer server)
+        public HomeController(ISmarterdamClient client, ISmarterdamServer server, IRepository<Measurement> repository)
         {
             this.client = client;
             this.server = server;
+            this.repository = repository;
         }
         //
         // GET: /Home/

@@ -78,6 +78,8 @@
     <Compile Include="Client\TestStartDateProvider.cs" />
     <Compile Include="Client\ModelsStarter.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="DataAccess\IRepository.cs" />
+    <Compile Include="DataAccess\MongoRepositoryAdapter.cs" />
     <Compile Include="Entities\Forecast.cs" />
     <Compile Include="Entities\ForecastResult.cs" />
     <Compile Include="Entities\Measurement.cs" />
@@ -127,9 +129,7 @@
     <Compile Include="Server\SmarterdamServer.cs" />
     <Compile Include="Server\StreamServer.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataAccess\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
