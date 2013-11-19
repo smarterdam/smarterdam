@@ -23,15 +23,17 @@ namespace Smarterdam.Web.Controllers
         private readonly Func<ISmarterdamClient> clientFunc;
         private readonly ISmarterdamServer server;
         private readonly IRepository<Measurement> repository;
+        private readonly ITestStartDateProvider testStartDateProvider;
 
         private static object gate = new object();
         
         [Inject]
-        public HomeController(Func<ISmarterdamClient> clientFunc, ISmarterdamServer server, IRepository<Measurement> repository)
+        public HomeController(Func<ISmarterdamClient> clientFunc, ISmarterdamServer server, IRepository<Measurement> repository, ITestStartDateProvider testStartDateProvider)
         {
             this.clientFunc = clientFunc;
             this.server = server;
             this.repository = repository;
+            this.testStartDateProvider = testStartDateProvider;
         }
         //
         // GET: /Home/
@@ -171,7 +173,7 @@ namespace Smarterdam.Web.Controllers
 
             model.ChartData = JsonConvert.SerializeObject(values);
             var lastDate = forecast.Results.LastOrDefault().TimeStamp;
-            model.Error = CalculateMAPE(forecast.Results.SkipWhile(x => x.TimeStamp <= lastDate.AddDays(-7)));
+            model.Error = CalculateMAPE(forecast.Results.SkipWhile(x => x.TimeStamp <= testStartDateProvider.GetTimestampOfTestStart(lastDate)));
 
             return model;
         }
@@ -206,7 +208,7 @@ namespace Smarterdam.Web.Controllers
                     //дата, начиная с которой будем использовать метод trust index
 
                 var lastDate = forecasts[0].Results.LastOrDefault().TimeStamp;
-                var startTestDate = lastDate.AddDays(-7);
+                var startTestDate = testStartDateProvider.GetTimestampOfTestStart(lastDate);
                 startForecastingDate = startForecastingDate.AddHours(12).Date; //округляем до ближайшего дня
 
                 var values = new List<ForecastResult>();

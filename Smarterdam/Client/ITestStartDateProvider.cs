@@ -11,5 +11,6 @@ namespace Smarterdam.Client
     public interface ITestStartDateProvider
     {
 		DateTime GetTimestampOfTestStart(string measurementId);
+        DateTime GetTimestampOfTestStart(DateTime lastTimeStamp);
     }
 }

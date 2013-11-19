@@ -61,6 +61,7 @@ namespace Smarterdam.PipelineModels
 				catch (Exception ex)
 				{
 					Logging.Debug(ex.ToString());
+				    throw;
 				}
 			}
 		}

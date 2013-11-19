@@ -58,6 +58,7 @@ namespace Smarterdam.PipelineModels
 				{
 					Logging.Debug("Error happened in pipeline {0} measurement {1}", pipelineName, id);
 					Logging.Debug(ex.ToString());
+				    throw;
 				}
 			}
 		}

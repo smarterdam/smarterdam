@@ -20,7 +20,13 @@ namespace Smarterdam.Client
 		public DateTime GetTimestampOfTestStart(string measurementId)
         {
             var finalDate = dataSource.GetLastTimestamp(Int32.Parse(measurementId));
-            return finalDate.AddDays(-3);
+		    return GetTimestampOfTestStart(finalDate);
+        }
+
+
+        public DateTime GetTimestampOfTestStart(DateTime lastTimeStamp)
+        {
+            return lastTimeStamp.AddDays(-7);
         }
     }
 }
