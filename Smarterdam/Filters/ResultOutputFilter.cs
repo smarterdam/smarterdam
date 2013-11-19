@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using MongoRepository;
+using Smarterdam.DataAccess;
 using Smarterdam.Api;
 using Smarterdam.Entities;
 using Smarterdam.Log;
@@ -47,7 +47,10 @@ namespace Smarterdam.Filters
                 var data = source.ToList();
 
                 var result = new ForecastResult();
-                result.Error = data[0].Values["MAPE"] as double?;
+                if (data[0].Values.ContainsKey("MAPE"))
+                {
+                    result.Error = data[0].Values["MAPE"] as double?;
+                }
                 result.TimeStamp = (DateTime)data[0].Values["TimeStamp"];
                 result.RealValue = data[0].Values["Value"] as double?;
                 result.PredictedValue = data[0].Values["PredictedValue"] as double?;

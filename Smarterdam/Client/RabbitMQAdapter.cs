@@ -37,7 +37,7 @@ namespace Smarterdam.Client
             initialized = true;
         }
 
-        private void InitConsumer(int measurementId, string queueId)
+        private void InitConsumer(string measurementId, string queueId)
         {
             var channel = connection.CreateModel();
             channels.TryAdd(queueId, channel);
@@ -54,7 +54,7 @@ namespace Smarterdam.Client
             channel.BasicConsume(queueName, true, consumer);
         }
 
-        public DataStreamUnit[] Dequeue(int measurementId, string queueId)
+        public DataStreamUnit[] Dequeue(string measurementId, string queueId)
         {
             if (!initialized)
             {

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MongoRepository;
 using Smarterdam.Entities;
 using Smarterdam.Filters;
 using Smarterdam.Pipelines;
+using Smarterdam.DataAccess;
 
 namespace Smarterdam.Client
 {
     public class IntelligenceManager : IIntelligenceManager
     {
         private FilterParameters parameters;
-        private readonly MongoRepository<Measurement> repository = new MongoRepository<Measurement>("mongodb://localhost/smarterdam", "measurements");
+        private readonly IRepository<Measurement> repository;
         private readonly ITestStartDateProvider testStartDateProvider;
 
         public class Entity
@@ -26,9 +26,10 @@ namespace Smarterdam.Client
             public string Validity { get; set; }
         }
 
-        public IntelligenceManager(ITestStartDateProvider testStartDateProvider)
+        public IntelligenceManager(ITestStartDateProvider testStartDateProvider, IRepository<Measurement> repository)
         {
             this.testStartDateProvider = testStartDateProvider;
+            this.repository = repository;
         }
 
         public virtual PipelinePack ComposePipeline(string id, string name)

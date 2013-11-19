@@ -20,14 +20,16 @@ namespace Smarterdam.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ISmarterdamClient client;
+        private readonly Func<ISmarterdamClient> clientFunc;
         private readonly ISmarterdamServer server;
         private readonly IRepository<Measurement> repository;
+
+        private static object gate = new object();
         
         [Inject]
-        public HomeController(ISmarterdamClient client, ISmarterdamServer server, IRepository<Measurement> repository)
+        public HomeController(Func<ISmarterdamClient> clientFunc, ISmarterdamServer server, IRepository<Measurement> repository)
         {
-            this.client = client;
+            this.clientFunc = clientFunc;
             this.server = server;
             this.repository = repository;
         }
@@ -53,24 +55,28 @@ namespace Smarterdam.Web.Controllers
         {
             var _id = Int32.Parse(id);
 
-            Logging.Info("entered Go");
-            
             var query = "db.ownerMax.streamA.SAVE";
-            
-            Logging.Info("manager created");
+
 
             server.Start(_id);
 
+            var client = clientFunc();
             client.Start(query, id);
         }
 
         [Authorize]
         public void BatchGo(int quantity = 0)
         {
-            var buildings = GetBuildingIdList();
-            foreach (var buildingId in buildings)
+            lock (gate)
             {
-                Go(buildingId);
+                Logging.Debug("Started BatchGo");
+                var buildings = GetBuildingIdList();
+                foreach (var buildingId in buildings)
+                {
+                    Logging.Debug("Starting Go for {0}", buildingId);
+                    Go(buildingId);
+                    Logging.Debug("Finished Go for {0}", buildingId);
+                }
             }
         }
 

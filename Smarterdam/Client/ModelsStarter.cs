@@ -12,6 +12,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Smarterdam.Api;
 using Smarterdam.Entities;
+using Smarterdam.Log;
 using Smarterdam.PipelineModels;
 using Smarterdam.Pipelines;
 
@@ -40,7 +41,9 @@ namespace Smarterdam.Client
 
 	        foreach (var model in models)
 	        {
+				Logging.Debug("Starting model {0} for measurement {1}", model.Name, measurementId);
 		        model.Start(measurementId, messageQueue);
+				Logging.Debug("Finished model {0} for measurement {1}", model.Name, measurementId);
 	        }
         }
     }

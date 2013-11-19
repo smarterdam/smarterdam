@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Smarterdam.Client;
+using Smarterdam.Log;
 using Smarterdam.Pipelines;
 
 namespace Smarterdam.PipelineModels
@@ -45,13 +46,18 @@ namespace Smarterdam.PipelineModels
 			{
 				try
 				{
-					var units = messageQueue.Dequeue(Int32.Parse(id), pipelineName);
+					var units = messageQueue.Dequeue(id, pipelineName);
 					pipeline.Execute(units);
 				}
 				catch (EndOfStreamException)
 				{
 					Console.WriteLine("End of stream");
 					break;
+				}
+				catch (Exception ex)
+				{
+					Logging.Debug("Error happened in pipeline {0} measurement {1}", pipelineName, id);
+					Logging.Debug(ex.ToString());
 				}
 			}
 		}

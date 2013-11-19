@@ -4,18 +4,18 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MongoRepository;
 using Smarterdam.Client;
+using Smarterdam.DataAccess;
 using Smarterdam.Entities;
 using Smarterdam.Filters;
+using Smarterdam.Log;
 using Smarterdam.Pipelines;
 
 namespace Smarterdam.PipelineModels
 {
 	public class NaivePipelineModel : IPipelineModel
 	{
-        private Random random = new Random();
-        private readonly MongoRepository<Measurement> repository = new MongoRepository<Measurement>("mongodb://localhost/smarterdam", "measurements");
+        private readonly IRepository<Measurement> repository;
 
 	    private string name;
 	    public string Name
@@ -23,9 +23,10 @@ namespace Smarterdam.PipelineModels
             get { return name; }
 	    }
 
-        public NaivePipelineModel()
+        public NaivePipelineModel(IRepository<Measurement> repository)
 		{
             this.name = this.GetType().ToString();
+            this.repository = repository;
 		}
 
 		public void Start(string id, IMessageQueue queue)
@@ -49,13 +50,17 @@ namespace Smarterdam.PipelineModels
 			{
 				try
 				{
-					var units = messageQueue.Dequeue(Int32.Parse(id), pipelineName);
+					var units = messageQueue.Dequeue(id, pipelineName);
 					pipeline.Execute(units);
 				}
 				catch (EndOfStreamException)
 				{
 					Console.WriteLine("End of stream");
 					break;
+				}
+				catch (Exception ex)
+				{
+					Logging.Debug(ex.ToString());
 				}
 			}
 		}

@@ -28,15 +28,7 @@ namespace Smarterdam.Client
         {
             var command = queryParser.Parse(query);
 
-            //if (command.ListCommand[3].GetMethodName() == "SAVE")
-            //{
             _modelsStarter.StartModels(measurementId);
-            //}
-
-            //if (command.ListCommand[3].GetMethodName() == "KILL")
-            //{
-            //    //"УБИВАЕМ" процесс
-            //}
         }
     }
 }

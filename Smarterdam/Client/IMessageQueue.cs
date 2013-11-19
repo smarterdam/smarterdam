@@ -8,6 +8,6 @@ namespace Smarterdam.Client
 {
     public interface IMessageQueue
     {
-        DataStreamUnit[] Dequeue(int measurementId, string queueId);
+        DataStreamUnit[] Dequeue(string measurementId, string queueId);
     }
 }

@@ -38,9 +38,9 @@ namespace Smarterdam.Client
             kernel.Bind<IIntelligenceManager>().To<IntelligenceManager>();
             kernel.Bind<IDataSource>().To<EcoScadaDataSource>();
             kernel.Bind<IDataGenerator>().To<RabbitMQDataGenerator>();
-            kernel.Bind<IQueryParser>().To<QueryParser>();
+            kernel.Bind<IQueryParser>().To<QueryParser>().InSingletonScope();
             kernel.Bind<IModelsStarter>().To<ModelsStarter>();
-            kernel.Bind<ITestStartDateProvider>().To<TestStartDateProvider>();
+            kernel.Bind<ITestStartDateProvider>().To<TestStartDateProvider>().InSingletonScope();
 
             kernel.Bind<IPipelineModel>().To<NaivePipelineModel>();
             kernel.Bind<IPipelineModel>().To<NeuralNetworkPipelineModel>();
@@ -52,6 +52,7 @@ namespace Smarterdam.Client
                   .WithConstructorArgument("collectionName", "measurements");
 
             kernel.Bind<ISmarterdamClient>().To<Starter>();
+            kernel.Bind<Func<ISmarterdamClient>>().ToMethod(c => (() => kernel.Get<ISmarterdamClient>()));
 
             kernel.Bind<ISmarterdamServer>().To<NullSmarterdamServer>();
 

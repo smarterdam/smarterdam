@@ -10,7 +10,7 @@ namespace Smarterdam.Tests.Mocks
 {
     public class MockMessageQueue : IMessageQueue
     {
-        public DataStreamUnit[] Dequeue(int measurementId, string queueId)
+        public DataStreamUnit[] Dequeue(string measurementId, string queueId)
         {
             var timeStamp = DateTime.Now;
 
