@@ -83,6 +83,7 @@
     <Compile Include="Entities\Forecast.cs" />
     <Compile Include="Entities\ForecastResult.cs" />
     <Compile Include="Entities\Measurement.cs" />
+    <Compile Include="Filters\MeanPredictionFilter.cs" />
     <Compile Include="Filters\NaivePredictionFilter.cs" />
     <Compile Include="Filters\DataExchange.cs" />
     <Compile Include="Filters\ResultOutputFilter.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Models\NeuralNetwork\StructuredDataSet.cs" />
     <Compile Include="Models\NeuralNetwork\Synapse.cs" />
     <Compile Include="Models\NeuralNetwork\TimeSeries.cs" />
+    <Compile Include="PipelineModels\MeanPipelineModel.cs" />
     <Compile Include="PipelineModels\NaivePipelineModel.cs" />
     <Compile Include="PipelineModels\IPipelineModel.cs" />
     <Compile Include="PipelineModels\NeuralNetworkPipelineModel.cs" />

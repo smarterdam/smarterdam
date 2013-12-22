@@ -12,5 +12,11 @@ namespace Smarterdam.Tests.Mocks
         {
             return DateTime.Now.AddSeconds(5);
         }
+
+
+        public DateTime GetTimestampOfTestStart(DateTime lastTimeStamp)
+        {
+            return lastTimeStamp.AddDays(-5);
+        }
     }
 }

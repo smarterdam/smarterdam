@@ -48,7 +48,7 @@ namespace Smarterdam.Web.Controllers
             model = new IndexViewModel();
             model.Measurements = lines.Select(x => new SelectListItem() { Text = x, Value = x });
 
-            model.CurrentTasks = repository.Select(x => x.MeasurementId).ToList();
+            model.CurrentTasks = repository.Select(x => x.MeasurementId).ToList().OrderBy(x => Int32.Parse(x)).ToList();
             return View(model);
         }
 
@@ -173,7 +173,8 @@ namespace Smarterdam.Web.Controllers
 
             model.ChartData = JsonConvert.SerializeObject(values);
             var lastDate = forecast.Results.LastOrDefault().TimeStamp;
-            model.Error = CalculateMAPE(forecast.Results.SkipWhile(x => x.TimeStamp <= testStartDateProvider.GetTimestampOfTestStart(lastDate)));
+            //lastDate = lastDate.AddHours(12).Date; //округляем до ближайшего дня
+            model.Error = CalculateMAPE(forecast.Results.SkipWhile(x => x.TimeStamp < testStartDateProvider.GetTimestampOfTestStart(lastDate)));
 
             return model;
         }
@@ -231,7 +232,7 @@ namespace Smarterdam.Web.Controllers
                 var errorSum = 0.0;
                 var counter = 0;
 
-                while (currentDay.Date < lastDate)
+                while (currentDay.Date <= lastDate.AddDays(1))
                 {
                     var innerCurrentDay = currentDay;
                     var nextDay = forecastResults.Select(x => x.TakeWhile(r => r.TimeStamp < innerCurrentDay).ToList()).ToList();
@@ -255,7 +256,7 @@ namespace Smarterdam.Web.Controllers
                 }
 
                 model.ChartData = JsonConvert.SerializeObject(GetValuesForChart(values));
-                model.Error = CalculateMAPE(values.SkipWhile(x => x.TimeStamp <= startTestDate));
+                model.Error = CalculateMAPE(values.SkipWhile(x => x.TimeStamp < startTestDate));
 
                 return model;
             }

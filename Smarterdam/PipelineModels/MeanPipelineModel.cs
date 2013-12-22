@@ -14,9 +14,9 @@ using Smarterdam.Pipelines;
 namespace Smarterdam.PipelineModels
 {
     /// <summary>
-    /// Наивная модель - берет для прогноза то же значение, что было день назад
+    /// Модель среднего - берет для прогноза среднее арифметическое от всех предыдущих значений
     /// </summary>
-	public class NaivePipelineModel : IPipelineModel
+	public class MeanPipelineModel : IPipelineModel
 	{
         private readonly IRepository<Measurement> repository;
 
@@ -26,7 +26,7 @@ namespace Smarterdam.PipelineModels
             get { return name; }
 	    }
 
-        public NaivePipelineModel(IRepository<Measurement> repository)
+        public MeanPipelineModel(IRepository<Measurement> repository)
 		{
             this.name = this.GetType().ToString();
             this.repository = repository;
@@ -38,7 +38,7 @@ namespace Smarterdam.PipelineModels
 
 		    var pipeline = new StreamPipeline();
             
-            pipeline.Register(new NaivePredictionFilter());
+            pipeline.Register(new MeanPredictionFilter());
             pipeline.Register(new ResultOutputFilter(repository) { MeasurementId = id, ForecastModelId = name });
 
             var task1 = Task.Factory.StartNew(() => { RegisterStream(queue, pipeline, id + "-online-" + suffix, id); });
