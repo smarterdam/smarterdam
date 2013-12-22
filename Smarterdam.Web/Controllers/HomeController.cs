@@ -196,8 +196,30 @@ namespace Smarterdam.Web.Controllers
             return values;
         }
 
-        private ChartViewModel GetTrustIndexChart(string id)
+        private ChartViewModel GetWinnerModelsChart(List<Tuple<DateTime, int>> winnerModels)
         {
+            var model = new ChartViewModel();
+            model.ChartName = "Winner models chart";
+
+            var values = new List<dynamic>();
+
+            foreach (var winner in winnerModels)
+            {
+                dynamic value = new ExpandoObject();
+                value.TimeStamp = winner.Item1;
+                value.ValueReal = winner.Item2;
+
+                values.Add(value);
+            }
+
+            model.ChartData = JsonConvert.SerializeObject(values);
+
+            return model;
+        }
+
+        private ChartViewModel GetTrustIndexChart(string id, out List<Tuple<DateTime, int>> winnerModels)
+        {
+            winnerModels = new List<Tuple<DateTime, int>>();
             var model = new ChartViewModel();
             model.ChartName = "Trust Index model";
 
@@ -242,7 +264,8 @@ namespace Smarterdam.Web.Controllers
                     var winningModelIndex = errors.FindIndex(x => x == minError);
                     trustIndexDict[winningModelIndex]++;
 
-                    var mostTrustedModelIndex = trustIndexDict.FirstOrDefault(x => x.Value == trustIndexDict.Max(y => y.Value)).Key;
+                    var mostTrustedModelIndex = currentDay.Day % 2; // trustIndexDict.FirstOrDefault(x => x.Value == trustIndexDict.Max(y => y.Value)).Key;
+                    winnerModels.Add(new Tuple<DateTime, int>(innerCurrentDay.AddDays(-1), mostTrustedModelIndex));
 
                     values.AddRange(nextDay[mostTrustedModelIndex]);
 
@@ -288,6 +311,7 @@ namespace Smarterdam.Web.Controllers
         public ActionResult Status(string id)
         {
             var model = new StatusViewModel();
+            model.BuildingId = id;
             
             try
             {
@@ -297,7 +321,9 @@ namespace Smarterdam.Web.Controllers
 					model.Charts.Add(GetChart(forecast));
 				}
 
-                model.Charts.Add(GetTrustIndexChart(id));
+                List<Tuple<DateTime, int>> winnerModels;
+                model.Charts.Add(GetTrustIndexChart(id, out winnerModels));
+                model.Charts.Add(GetWinnerModelsChart(winnerModels));
 
                 int i = 0;
                 foreach (var chart in model.Charts)
