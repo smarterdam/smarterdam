@@ -264,7 +264,7 @@ namespace Smarterdam.Web.Controllers
                     var winningModelIndex = errors.FindIndex(x => x == minError);
                     trustIndexDict[winningModelIndex]++;
 
-                    var mostTrustedModelIndex = currentDay.Day % 2; // trustIndexDict.FirstOrDefault(x => x.Value == trustIndexDict.Max(y => y.Value)).Key;
+                    var mostTrustedModelIndex = trustIndexDict.FirstOrDefault(x => x.Value == trustIndexDict.Max(y => y.Value)).Key;
                     winnerModels.Add(new Tuple<DateTime, int>(innerCurrentDay.AddDays(-1), mostTrustedModelIndex));
 
                     values.AddRange(nextDay[mostTrustedModelIndex]);
