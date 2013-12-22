@@ -20,7 +20,7 @@ namespace Smarterdam.Server
         public RabbitMQDataGenerator(IDataSource dataSource)
         {
             this.dataSource = dataSource;
-            dataSource.SetDate(DateTime.Now.AddDays(-50));
+            dataSource.SetDate(DateTime.Now.AddDays(-21));
         }
 
         public void Start(int updatePeriodInSeconds, int id)
