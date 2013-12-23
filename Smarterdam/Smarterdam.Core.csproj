@@ -112,6 +112,7 @@
     <Compile Include="Models\NeuralNetwork\StructuredDataSet.cs" />
     <Compile Include="Models\NeuralNetwork\Synapse.cs" />
     <Compile Include="Models\NeuralNetwork\TimeSeries.cs" />
+    <Compile Include="Models\TimeSeries2.cs" />
     <Compile Include="PipelineModels\MeanPipelineModel.cs" />
     <Compile Include="PipelineModels\NaivePipelineModel.cs" />
     <Compile Include="PipelineModels\IPipelineModel.cs" />
